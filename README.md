@@ -4,6 +4,15 @@ A reusable skill for designing and delivering nontrivial software systems with c
 
 It turns underspecified product goals into explicit decisions, testable guarantees, independently explored alternatives, a clean keeper implementation, adversarial validation, and a controlled rollout. The goal is not merely to generate code, but to preserve human understanding of the system's invariants, failure behavior, and major tradeoffs.
 
+## Two complementary perspectives
+
+| Perspective | Primary concern |
+| --- | --- |
+| **Engineer Software With Agents** | Outcomes, guarantees, failure behavior, architectural decisions, evidence, rollout, and operational understanding |
+| **Solid** | TDD, SOLID principles, clean code, object responsibilities, code smells, design patterns, and implementation structure |
+
+The main workflow applies the Solid perspective during keeper implementation and code review. Explicit product outcomes, system invariants, repository instructions, language idioms, and measured evidence take precedence over blanket style rules.
+
 ## When to use it
 
 Use this skill for:
@@ -68,6 +77,9 @@ See [risk-modes.md](references/risk-modes.md) for the selection criteria and req
 | [references/risk-modes.md](references/risk-modes.md) | Risk-scaled operating modes |
 | [references/attribution.md](references/attribution.md) | Sources, credits, and scope of the adaptation |
 | [scripts/scaffold_engineering.py](scripts/scaffold_engineering.py) | Non-overwriting project scaffold |
+| [skills/solid/SKILL.md](skills/solid/SKILL.md) | Companion implementation-quality skill |
+| [skills/solid/references](skills/solid/references) | SOLID, TDD, testing, clean-code, architecture, and design references |
+| [skills/solid/agents/openai.yaml](skills/solid/agents/openai.yaml) | Companion skill interface metadata |
 
 ## Attribution
 
@@ -76,4 +88,6 @@ This workflow is adapted from Josh Bleecher Snyder's:
 - [“Claude Is Not a Compiler”](https://blog.exe.dev/claude-is-not-a-compiler/)
 - [“Differential Spec Analysis”](https://commaok.xyz/ai/differential-spec/)
 
-The risk scaling, artifact contracts, safety gates, generalized comparison rubric, scaffold utility, and completion criteria are independent extensions. See [the full attribution](references/attribution.md).
+The risk scaling, artifact contracts, safety gates, generalized comparison rubric, scaffold utility, and completion criteria are independent extensions.
+
+The bundled Solid perspective is sourced from [ramziddin/solid-skills](https://github.com/ramziddin/solid-skills) through [Luis Lobo's fork](https://github.com/luislobo/solid-skills). See [the full attribution](references/attribution.md).
