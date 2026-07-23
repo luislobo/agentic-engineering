@@ -1,0 +1,6 @@
+interface:
+  display_name: "SOLID Software Engineering"
+  short_description: "TDD, SOLID, clean code, and object design"
+  default_prompt: "Use $solid to implement or refactor this code with context-appropriate TDD, SOLID, and clean-code practices."
+policy:
+  allow_implicit_invocation: false
