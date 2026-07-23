@@ -9,15 +9,19 @@ description: Design and deliver nontrivial software systems with coding agents t
 
 Work vertically from outcomes through product behavior, architecture, code, validation, and operations. Use agents to expose and test consequential decisions, not merely to translate a prompt into code.
 
+Keep the responsible human as the author of intent and the acceptor of the result. Agents may carry much of the middle execution, but they must not replace human taste at the start or human judgment at the end.
+
 Keep the human able to explain the system's invariants, failure behavior, major tradeoffs, and rollout even when agents wrote most individual lines.
 
 ## Core rules
 
 - Preserve the user's authorization boundaries. Do not deploy, mutate production, publish, or make irreversible changes without explicit permission.
+- Treat human authorship and final acceptance as non-delegable. Apply the [human craft and anti-slop lens](references/human-craft-and-anti-slop.md) throughout the work.
 - Do not silently strengthen or weaken a requirement. Translate phrases such as “highly available,” “exactly once,” or “survive a region loss” into explicit, testable guarantees with the user.
 - Separate consequential decisions from routine implementation choices. Surface consequential decisions; allow agents to make reversible local choices.
 - Compare observable behavior before code elegance.
 - Record assumptions and unasked decisions. An assumption made differently by two implementations is a missing specification.
+- Distinguish audit from repair. When asked only to assess, name concrete patterns and evidence without changing files. When authorized to repair, make the minimum effective change and preserve the repository's established voice.
 - Prefer evidence from prototypes, tests, benchmarks, fault injection, and authoritative sources over taste.
 - Build the keeper from the matured specification. Do not gradually rename an exploratory prototype into production.
 - Scale ceremony to risk. Do not commission multiple full systems for a narrow, reversible change.
@@ -28,14 +32,15 @@ Keep the human able to explain the system's invariants, failure behavior, major 
 ## Start the work
 
 1. Inspect the repository, existing architecture, tests, operational constraints, and applicable instructions.
-2. Restate the outcome, success measures, constraints, non-goals, and current authorization.
-3. Select `lean`, `standard`, or `high-assurance` mode using [risk-modes.md](references/risk-modes.md).
-4. Decide where to keep engineering artifacts:
+2. Preserve the human-authored starting point: extract the user's problem, desired outcome, non-goals, and taste from their own words; ask for approval when an agent must materially invent or reinterpret them.
+3. Restate the outcome, success measures, constraints, non-goals, and current authorization.
+4. Select `lean`, `standard`, or `high-assurance` mode using [risk-modes.md](references/risk-modes.md).
+5. Decide where to keep engineering artifacts:
    - Use the existing project documentation convention when one exists.
    - Use `.engineering/` for durable artifacts in a new project.
    - Keep artifacts in the task plan or scratch for small work that should not add repository files.
    - Ask before adding durable process documents to an established repository unless the user requested them.
-5. When durable artifacts are appropriate, run:
+6. When durable artifacts are appropriate, run:
 
 ```bash
 python3 <skill-dir>/scripts/scaffold_engineering.py \
@@ -61,6 +66,8 @@ Define:
 Resolve load, data sensitivity, availability, durability, recovery, compatibility, tenancy, compliance, deployment, and cost expectations to the degree that they can change architecture. Convert vague guarantees into measurable behavior. For example, distinguish “survive a regional outage” into accepted-write loss, behavior while a region is unavailable, recovery time, consistency during failover, and behavior when the failed region returns.
 
 Do not select an architecture or invent guarantee values before understanding the outcome. When material inputs remain unknown, present architecture-neutral questions or clearly labeled hypotheses rather than a recommended baseline. Investigate safe, read-only sources first. Ask the user only when a material choice lacks a safe reversible default.
+
+The outcome contract may be agent-organized, but its load-bearing intent and tradeoffs must come from the user's brief or receive explicit human acceptance.
 
 Pass the outcome gate before moving to architecture: success measures, non-goals, load-bearing guarantees, major constraints, and unresolved owner decisions must be explicit enough to reject at least one plausible design.
 
@@ -124,6 +131,8 @@ Pay special attention to important choices no implementation asked about. Repeat
 
 Create a clean keeper plan from the matured outcome contract, invariants, failure matrix, and decisions. Reuse proven ideas and code only after checking that they match the keeper specification.
 
+Make the minimum effective change that satisfies the matured specification. Preserve useful repository vocabulary, idioms, and structure; remove unrelated churn and justify every new abstraction, dependency, configuration option, and operational obligation.
+
 Implement in reviewable increments. For each increment:
 
 - state the behavior and decisions it realizes;
@@ -148,6 +157,18 @@ Use the two perspectives together:
 
 For exploratory spikes, generated code, non-object-oriented code, legacy compatibility work, or performance-critical low-level paths, apply only the Solid guidance that improves the stated outcome without distorting the experiment or system.
 
+### 6b. Protect human craft and repository voice
+
+Read [human-craft-and-anti-slop.md](references/human-craft-and-anti-slop.md). Treat its 25/50/25 model as ownership, not a literal time or code allocation:
+
+- The human shapes or approves intent, success, non-goals, taste, and unacceptable failure.
+- Agents amplify the middle through research, alternatives, implementation, testing, comparison, and review.
+- The human inspects load-bearing paths, accepts residual risk, and decides whether the result is ready.
+
+Choose audit or repair from the request before mutating files. In audit mode, name the pattern, evidence, consequence, and smallest plausible correction, then stop. In repair mode, preserve strong existing work and make the minimum effective change. Never guess whether code was AI-authored; evaluate observable patterns and evidence.
+
+Apply the software-slop catalog and craft gate proportionally to risk. Passing tests is necessary but insufficient when the change adds reviewer burden, unsupported claims, placeholder operations, needless abstraction, or behavior the responsible human cannot explain.
+
 ### 7. Validate adversarially
 
 Trace every goal and invariant to evidence. Select relevant:
@@ -157,6 +178,8 @@ Trace every goal and invariant to evidence. Select relevant:
 - security and dependency review;
 - performance and capacity measurements;
 - restart, rollback, recovery, and degraded-mode exercises.
+
+After technical checks, run the pass/fail craft gate in [human-craft-and-anti-slop.md](references/human-craft-and-anti-slop.md). Fix failures or record an explicit exception, rationale, and owner. Ensure completion, performance, reliability, and security claims match produced evidence.
 
 Conduct an adversarial review that tries to falsify the design. Resolve critical findings before calling the keeper ready. Record accepted residual risk and its owner.
 
@@ -172,6 +195,8 @@ Choose a rollout proportional to blast radius: local validation, shadow mode, da
 
 Obtain explicit authorization immediately before any production-changing action.
 
+Treat the final phase as acceptance, not a ceremonial review. The responsible human need not read every line, but must inspect the load-bearing interfaces, data and migration paths, security boundaries, failure and recovery mechanisms, rollout controls, and evidence needed to exercise judgment.
+
 Finish with a system interrogation. Ensure the responsible human can answer:
 
 - What must always remain true?
@@ -184,12 +209,13 @@ Finish with a system interrogation. Ensure the responsible human can answer:
 
 Do not claim completion until the applicable gates pass:
 
-1. **Outcome:** success measures and non-goals are explicit.
+1. **Outcome:** success measures and non-goals are explicit and reflect human-approved intent.
 2. **Specification:** critical invariants, failure behavior, and material decisions are resolved or consciously accepted.
-3. **Keeper:** implementation matches the matured specification.
-4. **Evidence:** relevant tests and adversarial review pass.
-5. **Operations:** rollout, observation, recovery, and ownership are clear.
-6. **Understanding:** the responsible human can reason about the system without relying on line-by-line code recall.
+3. **Keeper:** implementation matches the matured specification with the minimum effective, reviewable change.
+4. **Evidence:** relevant tests and adversarial review pass, and factual claims match produced evidence.
+5. **Craft:** repository voice is preserved where useful; named software-slop patterns are removed, justified, or explicitly accepted.
+6. **Operations:** rollout, observation, recovery, and ownership are clear.
+7. **Ownership:** the responsible human has reviewed load-bearing paths, accepted the result and residual risk, and can reason about the system without relying on line-by-line code recall.
 
 ## Communication
 
@@ -197,4 +223,6 @@ Lead updates with decisions, evidence, risks, and changes to expected behavior. 
 
 ## Acknowledgment
 
-This workflow is adapted from Josh Bleecher Snyder's account of vertically integrated, differential agent-assisted engineering in [“Claude Is Not a Compiler”](https://blog.exe.dev/claude-is-not-a-compiler) and his discussion of [differential specification analysis](https://commaok.xyz/ai/differential-spec/). The reusable workflow, risk scaling, artifact contracts, safety gates, and scaffold in this skill are an independent expansion. See [attribution.md](references/attribution.md).
+This workflow is adapted from Josh Bleecher Snyder's account of vertically integrated, differential agent-assisted engineering in [“Claude Is Not a Compiler”](https://blog.exe.dev/claude-is-not-a-compiler) and his discussion of [differential specification analysis](https://commaok.xyz/ai/differential-spec/). The reusable workflow, risk scaling, artifact contracts, safety gates, and scaffold in this skill are an independent expansion.
+
+The human-ownership and anti-slop lens is inspired by Peter Yang's [25/50/25 craft model](https://creatoreconomy.so/p/use-my-no-ai-slop-skill-to-remove-20-ai-slop-patterns) and MIT-licensed [`no-ai-slop`](https://github.com/petergyang/no-ai-slop) skill. The software-specific interpretation and pattern catalog are original to this repository. See [attribution.md](references/attribution.md).
