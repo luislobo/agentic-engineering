@@ -16,4 +16,15 @@ This skill paraphrases that process and independently adds:
 - a generalized comparison rubric;
 - traceability, rollout, and handoff requirements.
 
-The skill is not affiliated with or endorsed by Josh Bleecher Snyder, exe.dev, or the authors and organizations referenced in the source articles.
+## Bundled Solid perspective
+
+The companion implementation-quality perspective is sourced from:
+
+- Ramziddin, [`ramziddin/solid-skills`](https://github.com/ramziddin/solid-skills).
+- Luis Lobo's fork, [`luislobo/solid-skills`](https://github.com/luislobo/solid-skills), captured at commit [`8c223a0`](https://github.com/luislobo/solid-skills/commit/8c223a0ca0551f575ea1cd820cefbb15164be516).
+
+The Solid skill and its nine supporting references are reproduced without changing their core instructions. This repository adds the integration policy that treats them as a complementary implementation lens and resolves conflicts in favor of explicit outcomes, system invariants, repository conventions, language idioms, and evidence.
+
+The source README identifies Solid Skills as MIT-licensed. No separate license file was present in the source repository at the captured commit.
+
+This skill is not affiliated with or endorsed by Josh Bleecher Snyder, exe.dev, Ramziddin, or the authors and organizations referenced in the source materials.
