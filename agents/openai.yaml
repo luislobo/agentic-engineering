@@ -1,0 +1,12 @@
+interface:
+  display_name: Agentic Software Engineering
+  short_description: Decision-driven engineering with coding agents
+  default_prompt: Use $engineer-software-with-agents to design and build this software
+    system through explicit decisions, validation, and staged delivery.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
