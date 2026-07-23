@@ -23,6 +23,7 @@ Keep the human able to explain the system's invariants, failure behavior, major 
 - Scale ceremony to risk. Do not commission multiple full systems for a narrow, reversible change.
 - Follow repository instructions and preserve unrelated user changes.
 - Do not recommend a keeper architecture before the outcome gate passes. Label any earlier architecture as a hypothesis for evaluation.
+- Treat the bundled [Solid skill](skills/solid/SKILL.md) as a second implementation-quality perspective during keeper construction and review. Apply it contextually, never as an override of explicit outcomes, invariants, repository instructions, or measured evidence.
 
 ## Start the work
 
@@ -132,6 +133,20 @@ Implement in reviewable increments. For each increment:
 - update durable guidance only when a load-bearing decision changes.
 
 Do not preserve prototype complexity merely because it already exists.
+
+### 6a. Apply the Solid implementation perspective
+
+When keeper work involves application code, object-oriented design, refactoring, test design, or code-quality review, read [the bundled Solid skill](skills/solid/SKILL.md) and only the references relevant to the current decision.
+
+Use the two perspectives together:
+
+- This skill owns the outcome contract, failure semantics, system tradeoffs, evidence, rollout, and human understanding.
+- Solid owns implementation-level scrutiny: TDD, SOLID principles, naming, object responsibilities, code smells, patterns, and local architecture.
+- Translate its absolute rules into context-aware defaults unless the user or repository explicitly requires them. Numerical size limits, mandatory value objects, strict test-first order, and pattern preferences are prompts for scrutiny, not universal acceptance criteria.
+- Prefer the explicit outcome contract, safety and security invariants, repository instructions, language idioms, compatibility requirements, and empirical evidence when perspectives conflict.
+- Record a consequential disagreement in the decision ledger and resolve it through tests, a focused spike, or explicit owner judgment.
+
+For exploratory spikes, generated code, non-object-oriented code, legacy compatibility work, or performance-critical low-level paths, apply only the Solid guidance that improves the stated outcome without distorting the experiment or system.
 
 ### 7. Validate adversarially
 
