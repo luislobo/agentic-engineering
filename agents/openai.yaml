@@ -1,7 +1,7 @@
 interface:
   display_name: "Agentic Software Engineering"
-  short_description: "Decision-driven systems with SOLID implementation"
-  default_prompt: "Use $engineer-software-with-agents to design and build this software system through explicit decisions, the integrated Solid implementation lens, validation, and staged delivery."
+  short_description: "Human-owned systems with disciplined implementation"
+  default_prompt: "Use $engineer-software-with-agents to design and build this software system through human-owned intent and acceptance, explicit decisions, the integrated Solid implementation lens, craft checks, adversarial validation, and staged delivery."
 policy:
   products:
     - chatgpt
