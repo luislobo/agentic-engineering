@@ -1,0 +1,19 @@
+{
+  "name": "luislobo-agentic-engineering",
+  "owner": {
+    "name": "Luis Lobo"
+  },
+  "description": "Reusable software-engineering skills created and curated by Luis Lobo.",
+  "plugins": [
+    {
+      "name": "agentic-engineering",
+      "source": "./",
+      "description": "Decision-centered software engineering, implementation craft, validation, and PR closure.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Luis Lobo"
+      },
+      "category": "development"
+    }
+  ]
+}

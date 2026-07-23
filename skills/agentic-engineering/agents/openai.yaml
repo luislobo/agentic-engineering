@@ -1,0 +1,6 @@
+interface:
+  display_name: "Agentic Engineering"
+  short_description: "Human-owned systems from design through review"
+  default_prompt: "Use $agentic-engineering to design and build this software system through human-owned intent and acceptance, explicit decisions, implementation-quality scrutiny, craft checks, adversarial validation, evidence-backed PR closure when applicable, and staged delivery."
+policy:
+  allow_implicit_invocation: true

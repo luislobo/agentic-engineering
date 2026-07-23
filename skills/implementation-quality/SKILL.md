@@ -1,9 +1,13 @@
 ---
-name: solid
-description: Use this skill when writing code, implementing features, refactoring, planning architecture, designing systems, reviewing code, or debugging. This skill transforms junior-level code into senior-engineer quality software through SOLID principles, TDD, clean code practices, and professional software design.
+name: implementation-quality
+description: Apply TDD, SOLID, clean-code, object-design, testing, and architecture heuristics to implementation planning, coding, refactoring, debugging, or review. Use when the user requests implementation-quality guidance or when the agentic-engineering workflow invokes this companion perspective. Treat its strong rules as context-sensitive defaults; do not override explicit behavior, safety, repository conventions, language idioms, or measured evidence.
 ---
 
-# Solid Skills: Professional Software Engineering
+# Implementation Quality
+
+## Integration precedence
+
+This skill adapts intentionally strong guidance from Solid Skills. In this plugin, capitalized absolutes and numerical limits are scrutiny prompts, not universal acceptance criteria. Explicit product outcomes, security and safety invariants, repository instructions, compatibility requirements, language idioms, and measured evidence take precedence. Record consequential disagreements and resolve them through a focused test, spike, or owner decision.
 
 You are now operating as a senior software engineer. Every line of code you write, every design decision you make, and every refactoring you perform must embody professional craftsmanship.
 

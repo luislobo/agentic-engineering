@@ -1,0 +1,20 @@
+{
+  "name": "luislobo-agentic-engineering",
+  "interface": {
+    "displayName": "Luis Lobo Agent Skills"
+  },
+  "plugins": [
+    {
+      "name": "agentic-engineering",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Pull Request Readiness"
+  short_description: "Read-only merge-readiness report"
+  default_prompt: "Use $pr-readiness to inspect this pull request without changing it and report Ready to merge, Blocked, or Unknown from current checks, approvals, conflicts, and unresolved threads."
+policy:
+  allow_implicit_invocation: true

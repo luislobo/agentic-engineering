@@ -1,9 +1,9 @@
 ---
-name: engineer-software-with-agents
+name: agentic-engineering
 description: Design and deliver nontrivial software systems with coding agents through risk-scaled research, explicit decision records, independent alternatives, differential specification analysis, a keeper implementation, adversarial validation, and staged rollout. Use when building a greenfield system or major subsystem, resolving architecture or failure-semantics choices, coordinating coding agents, or turning an underspecified product goal into production-ready software, especially for distributed, concurrent, security-sensitive, data-critical, or operationally risky work. Do not trigger for tiny isolated edits unless the user explicitly requests this workflow.
 ---
 
-# Engineer Software With Agents
+# Agentic Engineering
 
 ## Objective
 
@@ -27,7 +27,8 @@ Keep the human able to explain the system's invariants, failure behavior, major 
 - Scale ceremony to risk. Do not commission multiple full systems for a narrow, reversible change.
 - Follow repository instructions and preserve unrelated user changes.
 - Do not recommend a keeper architecture before the outcome gate passes. Label any earlier architecture as a hypothesis for evaluation.
-- Treat the bundled [Solid skill](skills/solid/SKILL.md) as a second implementation-quality perspective during keeper construction and review. Apply it contextually, never as an override of explicit outcomes, invariants, repository instructions, or measured evidence.
+- When the companion `$implementation-quality` skill is installed, treat it as a second implementation-quality perspective during keeper construction and review. Apply it contextually, never as an override of explicit outcomes, invariants, repository instructions, or measured evidence.
+- When work is delivered through a pull request, apply the [PR feedback closure lifecycle](references/pr-feedback-closure.md) or invoke the companion `$pr-feedback-closure` skill when installed. Treat readiness checks as read-only and merges as separately authorized actions.
 
 ## Start the work
 
@@ -143,19 +144,19 @@ Implement in reviewable increments. For each increment:
 
 Do not preserve prototype complexity merely because it already exists.
 
-### 6a. Apply the Solid implementation perspective
+### 6a. Apply the implementation-quality perspective
 
-When keeper work involves application code, object-oriented design, refactoring, test design, or code-quality review, read [the bundled Solid skill](skills/solid/SKILL.md) and only the references relevant to the current decision.
+When keeper work involves application code, object-oriented design, refactoring, test design, or code-quality review, invoke the companion `$implementation-quality` skill when installed. If it is unavailable, apply the implementation checks below without delaying the work.
 
 Use the two perspectives together:
 
 - This skill owns the outcome contract, failure semantics, system tradeoffs, evidence, rollout, and human understanding.
-- Solid owns implementation-level scrutiny: TDD, SOLID principles, naming, object responsibilities, code smells, patterns, and local architecture.
+- The implementation-quality perspective owns local scrutiny: TDD, SOLID principles, naming, object responsibilities, code smells, patterns, and architecture.
 - Translate its absolute rules into context-aware defaults unless the user or repository explicitly requires them. Numerical size limits, mandatory value objects, strict test-first order, and pattern preferences are prompts for scrutiny, not universal acceptance criteria.
 - Prefer the explicit outcome contract, safety and security invariants, repository instructions, language idioms, compatibility requirements, and empirical evidence when perspectives conflict.
 - Record a consequential disagreement in the decision ledger and resolve it through tests, a focused spike, or explicit owner judgment.
 
-For exploratory spikes, generated code, non-object-oriented code, legacy compatibility work, or performance-critical low-level paths, apply only the Solid guidance that improves the stated outcome without distorting the experiment or system.
+For exploratory spikes, generated code, non-object-oriented code, legacy compatibility work, or performance-critical low-level paths, apply only the implementation guidance that improves the stated outcome without distorting the experiment or system.
 
 ### 6b. Protect human craft and repository voice
 
@@ -182,6 +183,19 @@ Trace every goal and invariant to evidence. Select relevant:
 After technical checks, run the pass/fail craft gate in [human-craft-and-anti-slop.md](references/human-craft-and-anti-slop.md). Fix failures or record an explicit exception, rationale, and owner. Ensure completion, performance, reliability, and security claims match produced evidence.
 
 Conduct an adversarial review that tries to falsify the design. Resolve critical findings before calling the keeper ready. Record accepted residual risk and its owner.
+
+### 7a. Close the pull-request review loop
+
+When the work is delivered through a pull request or the user asks about PR feedback, read [pr-feedback-closure.md](references/pr-feedback-closure.md). Use the companion `$pr-feedback-closure` skill when it is installed.
+
+- In status mode, inspect metadata, checks, approvals, conflicts, and unresolved threads without mutating anything.
+- In address-feedback mode, classify each unresolved thread as ACCEPT, REJECT, or OWNER DECISION and stop for human approval before editing.
+- Implement approved ACCEPT items with minimum-effective changes and relevant evidence. Answer REJECT items without changing correct code or adding comment noise. Wait for OWNER DECISION items.
+- Reply in the original thread, keep thread IDs separate from comment IDs, resolve only after closure, and re-query current state.
+- Report Ready to merge, Blocked, or Unknown from current evidence. Request a fresh review only when supported and authorized.
+- Never merge without a separate explicit request.
+
+Use the platform's connected GitHub integration first. Fall back to a local GitHub CLI or GraphQL only for capabilities the integration does not expose.
 
 ### 8. Roll out and transfer understanding
 
@@ -213,9 +227,10 @@ Do not claim completion until the applicable gates pass:
 2. **Specification:** critical invariants, failure behavior, and material decisions are resolved or consciously accepted.
 3. **Keeper:** implementation matches the matured specification with the minimum effective, reviewable change.
 4. **Evidence:** relevant tests and adversarial review pass, and factual claims match produced evidence.
-5. **Craft:** repository voice is preserved where useful; named software-slop patterns are removed, justified, or explicitly accepted.
-6. **Operations:** rollout, observation, recovery, and ownership are clear.
-7. **Ownership:** the responsible human has reviewed load-bearing paths, accepted the result and residual risk, and can reason about the system without relying on line-by-line code recall.
+5. **Review closure:** when a pull request is used, material threads have approved dispositions, replies carry evidence, current resolution state is verified, and readiness blockers are explicit.
+6. **Craft:** repository voice is preserved where useful; named software-slop patterns are removed, justified, or explicitly accepted.
+7. **Operations:** rollout, observation, recovery, and ownership are clear.
+8. **Ownership:** the responsible human has reviewed load-bearing paths, accepted the result and residual risk, and can reason about the system without relying on line-by-line code recall.
 
 ## Communication
 
@@ -225,4 +240,6 @@ Lead updates with decisions, evidence, risks, and changes to expected behavior. 
 
 This workflow is adapted from Josh Bleecher Snyder's account of vertically integrated, differential agent-assisted engineering in [“Claude Is Not a Compiler”](https://blog.exe.dev/claude-is-not-a-compiler) and his discussion of [differential specification analysis](https://commaok.xyz/ai/differential-spec/). The reusable workflow, risk scaling, artifact contracts, safety gates, and scaffold in this skill are an independent expansion.
 
-The human-ownership and anti-slop lens is inspired by Peter Yang's [25/50/25 craft model](https://creatoreconomy.so/p/use-my-no-ai-slop-skill-to-remove-20-ai-slop-patterns) and MIT-licensed [`no-ai-slop`](https://github.com/petergyang/no-ai-slop) skill. The software-specific interpretation and pattern catalog are original to this repository. See [attribution.md](references/attribution.md).
+The human-ownership and anti-slop lens is inspired by Peter Yang's [25/50/25 craft model](https://creatoreconomy.so/p/use-my-no-ai-slop-skill-to-remove-20-ai-slop-patterns) and MIT-licensed [`no-ai-slop`](https://github.com/petergyang/no-ai-slop) skill. The software-specific interpretation and pattern catalog are original to this repository.
+
+The PR review closure lifecycle was independently developed by Luis Lobo and later donated for organizational use. This repository packages his process as portable Agent Skills for Codex, Claude Code, GitHub Copilot CLI, and Google Antigravity 2 while resolving it against the authorization, evidence, and anti-slop rules above. See [attribution.md](references/attribution.md).

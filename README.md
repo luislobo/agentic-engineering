@@ -1,109 +1,151 @@
-# Engineer Software With Agents
+# Agentic Engineering
 
-A reusable skill for designing and delivering nontrivial software systems with coding agents.
+A portable plugin and skill pack for building nontrivial software with coding agents while keeping consequential decisions, evidence, and final acceptance under human ownership.
 
-It turns underspecified product goals into explicit decisions, testable guarantees, independently explored alternatives, a clean keeper implementation, adversarial validation, and a controlled rollout. The goal is not merely to generate code, but to preserve human understanding of the system's invariants, failure behavior, and major tradeoffs.
+Created and maintained by [Luis Lobo](https://github.com/luislobo).
 
-The responsible human remains the author of intent and the acceptor of the result, even when agents perform much of the research, implementation, testing, and review.
+## What it contains
 
-## Three complementary perspectives
-
-| Perspective | Primary concern |
+| Skill | Purpose |
 | --- | --- |
-| **Vertical decision engineering** | Outcomes, guarantees, hidden choices, failure behavior, architecture, evidence, rollout, and operational understanding, adapted from Josh Bleecher Snyder |
-| **Solid implementation** | TDD, SOLID principles, clean code, object responsibilities, code smells, design patterns, and implementation structure, sourced from Solid Skills |
-| **Human craft and anti-slop** | Human-owned intent and acceptance, minimum-effective changes, repository voice, checkable claims, reviewer trust, and a final craft gate, inspired by Peter Yang |
+| `agentic-engineering` | Risk-scaled system design and delivery: outcomes, invariants, alternatives, differential analysis, keeper implementation, adversarial validation, rollout, and handoff |
+| `implementation-quality` | A complementary implementation lens covering TDD, SOLID, clean code, object responsibilities, code smells, patterns, testing, and local architecture |
+| `pr-readiness` | A strictly read-only pull-request readiness report |
+| `pr-feedback-closure` | Approval-gated feedback triage, minimum-effective repairs, evidence-backed replies, verified resolution, and readiness reporting |
 
-The perspectives answer different questions: what system should exist, how its implementation should be structured, and whether humans have exercised enough taste and judgment to trust the result. Explicit product outcomes, safety and security invariants, repository instructions, language idioms, and measured evidence decide conflicts.
+The workflow combines four distinct perspectives:
 
-## Human ownership, not a code quota
+1. Josh Bleecher Snyder’s vertically integrated, differential agent engineering.
+2. Ramziddin’s Solid Skills, integrated through Luis Lobo’s fork.
+3. Peter Yang’s human-craft and 25/50/25 concepts, adapted from writing to software engineering.
+4. Luis Lobo’s independently developed PR review lifecycle.
 
-The integrated 25/50/25 model describes ownership and attention rather than a literal split of time or code:
+They are not collapsed into one doctrine. Outcomes, safety, repository rules, language idioms, and measured evidence decide conflicts.
 
-1. **Human-shaped intent:** the responsible human states or approves the problem, desired outcome, non-goals, constraints, taste, and unacceptable failures.
-2. **Agent-amplified execution:** agents research, explore, implement, test, compare, and review while surfacing consequential choices.
-3. **Human-accepted result:** the responsible human inspects load-bearing paths and evidence, accepts residual risk, and decides whether to release.
+## Why this is a plugin
 
-The human does not need to read every line. They do need enough understanding of interfaces, data, security, concurrency, failure and recovery, rollout, and evidence to exercise judgment. See [human-craft-and-anti-slop.md](references/human-craft-and-anti-slop.md).
+Each workflow is a self-contained Agent Skill. The plugin is the distribution layer: it installs the related skills as one versioned package and adds only the metadata each host requires.
 
-## When to use it
+No custom MCP server is bundled. GitHub work uses the host’s connected GitHub integration first, then a local `gh`/GraphQL fallback only when a required capability is missing. That keeps authentication and authorization in the host instead of hiding them in this package.
 
-Use this skill for:
+## Install
 
-- greenfield systems and major subsystems;
-- distributed, concurrent, security-sensitive, or data-critical software;
-- architecture and failure-semantics decisions;
-- work where reliability, recovery, compatibility, or rollout risk matters;
-- production-ready delivery coordinated through coding agents.
+The repository is private, so the selected client must be able to authenticate to GitHub.
 
-It intentionally stays lightweight for small, isolated, reversible edits.
-
-## Workflow
-
-1. Preserve the human-shaped intent and establish a measurable outcome contract.
-2. Research only facts that can change a decision.
-3. Specify invariants and failure behavior before architecture.
-4. Generate alternatives at a depth proportional to risk.
-5. Compare their divergences to expose missing specification.
-6. Build the minimum effective keeper from the matured decisions.
-7. Validate technical behavior, operational readiness, and software craft.
-8. Obtain human acceptance, roll out gradually, and transfer operational understanding.
-
-See [SKILL.md](SKILL.md) for the complete workflow.
-
-## Usage
-
-Invoke the skill explicitly with a prompt such as:
-
-```text
-Use $engineer-software-with-agents to design and build this distributed event-processing system.
-```
-
-When durable engineering artifacts are appropriate, create them with:
+### Codex
 
 ```bash
-python3 scripts/scaffold_engineering.py \
-  --root <project-root> \
-  --mode <lean|standard|high-assurance>
+codex plugin marketplace add luislobo/agentic-engineering
+codex plugin add agentic-engineering@luislobo-agentic-engineering
 ```
 
-The scaffold utility does not overwrite existing files.
+Start a new session after installation, then invoke a skill such as:
 
-## Risk modes
+```text
+Use $agentic-engineering to design and build this distributed system.
+```
 
-| Mode | Best for | Typical depth |
-| --- | --- | --- |
-| Lean | Narrow, reversible work | One design plus a focused challenge |
-| Standard | Significant features and subsystems | Multiple options and targeted implementation spikes |
-| High assurance | High-blast-radius or critical systems | Independent implementations, differential analysis, and extensive validation |
+### Claude Code
 
-See [risk-modes.md](references/risk-modes.md) for the selection criteria and required evidence.
+```bash
+claude plugin marketplace add luislobo/agentic-engineering
+claude plugin install agentic-engineering@luislobo-agentic-engineering
+```
+
+Claude plugin skills are namespaced, for example:
+
+```text
+/agentic-engineering:agentic-engineering
+```
+
+### GitHub Copilot CLI
+
+```bash
+copilot plugin install luislobo/agentic-engineering
+```
+
+Confirm installation with `copilot plugin list` and inspect loaded skills with `/skills list`.
+
+### Google Antigravity 2
+
+Antigravity consumes the open Agent Skills format rather than the Codex, Claude, or Copilot plugin manifests:
+
+```bash
+npx skills add luislobo/agentic-engineering --agent=antigravity
+```
+
+For a workspace-only installation, run the command from that project. Antigravity’s workspace discovery location is `.agents/skills/`.
+
+## Operating model
+
+The integrated 25/50/25 model is about ownership, not a literal time or code quota:
+
+1. **Human-shaped intent:** a responsible person states or approves the outcome, constraints, non-goals, taste, and unacceptable failures.
+2. **Agent-amplified execution:** agents research, compare, implement, test, challenge, and document consequential choices.
+3. **Human-accepted result:** a responsible person inspects load-bearing paths and evidence, accepts residual risk, and decides whether to release.
+
+For significant work, the main workflow:
+
+1. establishes an outcome contract;
+2. researches decision-changing facts;
+3. specifies invariants and failure behavior;
+4. creates risk-scaled alternatives;
+5. compares divergences to expose missing specification;
+6. builds a clean keeper;
+7. validates behavior and craft adversarially;
+8. closes review feedback when applicable;
+9. stages rollout and transfers operational understanding.
+
+## Safety boundaries
+
+- A status request is read-only.
+- Review feedback is classified before any repair.
+- Mutating PR work pauses for disposition approval.
+- Production changes require explicit authorization immediately before action.
+- A merge always requires a separate explicit request.
+- Missing evidence produces **Unknown**, not an optimistic readiness claim.
 
 ## Repository structure
 
-| Path | Purpose |
-| --- | --- |
-| [SKILL.md](SKILL.md) | Core agent workflow and completion gates |
-| [agents/openai.yaml](agents/openai.yaml) | Skill interface metadata |
-| [references/artifact-guide.md](references/artifact-guide.md) | Engineering artifact contracts |
-| [references/differential-analysis.md](references/differential-analysis.md) | Alternative-comparison method |
-| [references/risk-modes.md](references/risk-modes.md) | Risk-scaled operating modes |
-| [references/human-craft-and-anti-slop.md](references/human-craft-and-anti-slop.md) | Human ownership model, audit and repair modes, software-slop catalog, and craft gate |
-| [references/attribution.md](references/attribution.md) | Sources, credits, and scope of the adaptation |
-| [scripts/scaffold_engineering.py](scripts/scaffold_engineering.py) | Non-overwriting project scaffold |
-| [skills/solid/SKILL.md](skills/solid/SKILL.md) | Companion implementation-quality skill |
-| [skills/solid/references](skills/solid/references) | SOLID, TDD, testing, clean-code, architecture, and design references |
-| [skills/solid/agents/openai.yaml](skills/solid/agents/openai.yaml) | Companion skill interface metadata |
+```text
+skills/                    canonical, self-contained Agent Skills
+.codex-plugin/plugin.json  Codex package metadata
+.agents/plugins/           Codex repository marketplace
+.claude-plugin/            Claude manifest and marketplace
+plugin.json                GitHub Copilot CLI manifest
+docs/                      compatibility contract and decisions
+scripts/                   distribution validation
+tests/                     safety and structure checks
+```
 
-## Attribution
+See [the compatibility contract](docs/COMPATIBILITY.md), [the design decisions](docs/DECISIONS.md), and [the full notices](NOTICE.md).
 
-The vertically integrated and differential-specification workflow is adapted from Josh Bleecher Snyder's:
+## Quality controls
 
-- [“Claude Is Not a Compiler”](https://blog.exe.dev/claude-is-not-a-compiler/)
-- [“Differential Spec Analysis”](https://commaok.xyz/ai/differential-spec/)
+Run:
 
-The bundled Solid implementation perspective is sourced from [ramziddin/solid-skills](https://github.com/ramziddin/solid-skills) through [Luis Lobo's fork](https://github.com/luislobo/solid-skills).
+```bash
+python3 scripts/validate_distribution.py
+python3 -m unittest discover -s tests -v
+```
 
-The human-craft perspective is inspired by Peter Yang's [25/50/25 essay](https://creatoreconomy.so/p/use-my-no-ai-slop-skill-to-remove-20-ai-slop-patterns) and MIT-licensed [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop) skill. This repository adapts its ownership, audit-versus-repair, minimum-effective-edit, voice-preservation, evidence, and self-evaluation ideas into a software-specific lens; it does not bundle the writing skill.
+CI repeats these checks and validates every skill plus the Codex and Claude package contracts. The validator rejects:
 
-See [the full attribution](references/attribution.md) for pinned revisions, licensing notes, and the boundary between source material and this repository's extensions.
+- broken or escaping local links;
+- non-portable canonical frontmatter;
+- duplicated or mismatched skill names;
+- unsupported OpenAI metadata;
+- drift between manifests;
+- unsafe PR trigger language;
+- platform-specific assumptions in canonical workflows;
+- missing credits or required package files.
+
+## Credits
+
+- [Josh Bleecher Snyder, “Claude Is Not a Compiler”](https://blog.exe.dev/claude-is-not-a-compiler/)
+- [Josh Bleecher Snyder, “Differential Spec Analysis”](https://commaok.xyz/ai/differential-spec/)
+- [ramziddin/solid-skills](https://github.com/ramziddin/solid-skills) and [luislobo/solid-skills](https://github.com/luislobo/solid-skills)
+- [Peter Yang’s 25/50/25 essay](https://creatoreconomy.so/p/use-my-no-ai-slop-skill-to-remove-20-ai-slop-patterns) and [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop)
+- Luis Lobo’s independently developed PR review lifecycle
+
+See [NOTICE.md](NOTICE.md) and the [detailed attribution](skills/agentic-engineering/references/attribution.md) for pinned revisions, adaptation boundaries, and licensing notes.

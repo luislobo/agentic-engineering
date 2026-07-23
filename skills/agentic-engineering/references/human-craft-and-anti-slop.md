@@ -99,7 +99,7 @@ Scale the gate with the selected risk mode. Lean work can use a focused self-che
 ## How the three perspectives fit
 
 - Josh Bleecher Snyder's vertically integrated and differential-specification perspective helps discover which system decisions matter and resolve hidden choices across layers.
-- The bundled Solid perspective challenges implementation structure, responsibilities, naming, testing, and maintainability.
+- The implementation-quality perspective, adapted from Solid Skills, challenges implementation structure, responsibilities, naming, testing, and maintainability.
 - Peter Yang's craft perspective keeps human taste, voice, trust, and final accountability at the first and last mile.
 
 Use all three without turning any of them into ritual. Explicit outcomes, safety and security invariants, repository instructions, language idioms, and evidence decide conflicts.

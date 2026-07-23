@@ -1,0 +1,37 @@
+{
+  "name": "agentic-engineering",
+  "version": "2.0.0",
+  "description": "A cross-agent software-engineering workflow for explicit decisions, implementation craft, adversarial validation, and safe PR closure.",
+  "author": {
+    "name": "Luis Lobo",
+    "url": "https://github.com/luislobo"
+  },
+  "homepage": "https://github.com/luislobo/agentic-engineering",
+  "repository": "https://github.com/luislobo/agentic-engineering",
+  "keywords": [
+    "software-engineering",
+    "agent-skills",
+    "architecture",
+    "code-review",
+    "solid"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agentic Engineering",
+    "shortDescription": "Human-owned, agent-amplified software delivery",
+    "longDescription": "Design, implement, validate, and review nontrivial software through explicit decisions, complementary engineering lenses, and evidence-backed completion gates.",
+    "developerName": "Luis Lobo",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/luislobo/agentic-engineering",
+    "defaultPrompt": [
+      "Design this system with explicit invariants and alternatives.",
+      "Build this feature and validate the load-bearing behavior.",
+      "Check this pull request without merging it."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

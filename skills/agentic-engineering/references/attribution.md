@@ -25,7 +25,7 @@ The companion implementation-quality perspective is sourced from:
 - Ramziddin, [ramziddin/solid-skills](https://github.com/ramziddin/solid-skills).
 - Luis Lobo's fork, [luislobo/solid-skills](https://github.com/luislobo/solid-skills), captured at commit [8c223a0](https://github.com/luislobo/solid-skills/commit/8c223a0ca0551f575ea1cd820cefbb15164be516).
 
-The Solid skill and its nine supporting references are reproduced without changing their core instructions. This repository adds the integration policy that treats them as a complementary implementation lens and resolves conflicts in favor of explicit outcomes, system invariants, repository conventions, language idioms, and evidence.
+The Solid skill and its nine supporting references preserve the source's core instructions. This repository adds a concise integration-precedence section and narrows the trigger description so the material acts as a complementary implementation lens. Conflicts resolve in favor of explicit outcomes, system invariants, repository conventions, language idioms, and evidence.
 
 The source README identifies Solid Skills as MIT-licensed. No separate license file was present in the source repository at the captured commit.
 
@@ -50,4 +50,23 @@ This repository reinterprets those mechanisms for software engineering. It adds 
 
 The source repository is licensed under the MIT License, copyright © 2026 Peter Yang. The pinned [SKILL.md](https://github.com/petergyang/no-ai-slop/blob/61c21c351da4dcb40946a11fead978f2078a2c65/SKILL.md), [eval.md](https://github.com/petergyang/no-ai-slop/blob/61c21c351da4dcb40946a11fead978f2078a2c65/eval.md), and [LICENSE](https://github.com/petergyang/no-ai-slop/blob/61c21c351da4dcb40946a11fead978f2078a2c65/LICENSE) are linked for provenance.
 
-This skill is not affiliated with or endorsed by Josh Bleecher Snyder, exe.dev, Ramziddin, Peter Yang, Behind the Craft, or the authors and organizations referenced in the source materials.
+## Pull-request review closure and cross-agent adapters
+
+Luis Lobo independently developed the PR review lifecycle on his own time and later donated it for organizational use. His process contributes:
+
+- a read-only PR status and merge-readiness view;
+- unresolved-thread retrieval and stable identifier tracking;
+- ACCEPT and REJECT classification;
+- a human approval pause before edits;
+- coherent review-driven changes and relevant validation;
+- replies in the original review threads;
+- thread resolution followed by a zero-unresolved verification;
+- an optional fresh Copilot review.
+
+This repository packages the process as portable, outcome-oriented Agent Skills for Codex, Claude Code, GitHub Copilot CLI, and Google Antigravity 2. Canonical workflows prefer the host's connected GitHub integration and use GitHub CLI or GraphQL only for missing capabilities. Every host uses the same lifecycle.
+
+The packaged form adds OWNER DECISION escalation, an Unknown verdict for incomplete evidence, separate merge authorization, repository-defined checks instead of an npm assumption, conditional rather than automatic inline comments for rejected feedback, and installers that verify but do not automatically install system dependencies.
+
+Luis Lobo retains authorship of the original process.
+
+No endorsement is claimed from Josh Bleecher Snyder, exe.dev, Ramziddin, Peter Yang, Behind the Craft, or other referenced third parties.
