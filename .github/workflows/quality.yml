@@ -17,7 +17,16 @@ jobs:
           python-version: "3.12"
       - name: Validate distribution
         run: python3 scripts/validate_distribution.py
+      - name: Validate behavioral eval definitions
+        run: python3 scripts/evaluate_behavior.py
+      - name: Verify generated shared references
+        run: python3 scripts/sync_shared_references.py --check
       - name: Run contract tests
         run: python3 -m unittest discover -s tests -v
       - name: Compile Python utilities
-        run: python3 -m py_compile scripts/validate_distribution.py skills/agentic-engineering/scripts/scaffold_engineering.py
+        run: >-
+          python3 -m py_compile
+          scripts/validate_distribution.py
+          scripts/evaluate_behavior.py
+          scripts/sync_shared_references.py
+          skills/agentic-engineering/scripts/scaffold_engineering.py
