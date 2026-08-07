@@ -18,6 +18,8 @@ The canonical source of behavior is `skills/*/SKILL.md` plus files contained ins
     representations must generate or verify equivalent self-contained skills.
 12. Intentionally duplicated safety references have one declared canonical source and are
     byte-verified in CI.
+13. Repository-development guidance uses AGENTS.md as canonical, CLAUDE.md as a native import, and
+    a generated Copilot repository instruction file; symlinks are not required.
 
 ## Platform mapping
 
