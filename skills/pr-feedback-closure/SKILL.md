@@ -14,6 +14,9 @@ Read [the canonical lifecycle](references/lifecycle.md) before changing a pull r
 ## Core rules
 
 - Resolve the exact repository, pull-request number, and current head revision before acting.
+- Always retrieve and read suppressed review material when the host exposes it, including resolved,
+  outdated, minimized, collapsed, and hidden-by-default comments. Use it as context without
+  automatically reopening or reclassifying it as unresolved.
 - Treat status checks as read-only. Do not turn a status request into edits, replies, resolutions, review requests, or merges.
 - In address-feedback mode, triage first and stop for approval of the dispositions before editing.
 - Use **ACCEPT**, **REJECT**, or **OWNER DECISION**. Do not hide ambiguity inside ACCEPT.
@@ -27,7 +30,8 @@ Read [the canonical lifecycle](references/lifecycle.md) before changing a pull r
 
 ## Tool routing
 
-1. Prefer the host agent's connected GitHub integration for repository metadata, PR metadata and patches, flat comment reads, replies, and other supported structured operations.
+1. Prefer the host agent's connected GitHub integration for repository metadata, PR metadata and
+   patches, flat and suppressed comment reads, replies, and other supported structured operations.
 2. Use the host's native review-comment workflow when available for unresolved-thread work.
 3. Use the host's native CI-debugging workflow when checks fail and the user authorizes diagnosis or repair.
 4. Use a local GitHub CLI or GraphQL only for gaps such as thread-level resolution state, resolution mutations, current-branch PR discovery, or Actions logs.
@@ -38,7 +42,10 @@ Read [the canonical lifecycle](references/lifecycle.md) before changing a pull r
 
 ### 1. Capture the initial state
 
-Read the PR patch, comments, unresolved threads, review state, checks, and repository instructions. Preserve the initial head revision so later evidence can be tied to the correct code.
+Read the PR patch, all comments, suppressed review material, unresolved threads, review state,
+checks, and repository instructions. Preserve the initial head revision so later evidence can be
+tied to the correct code. If suppressed comments cannot be retrieved, identify that coverage gap
+before triage and do not imply that comment review is complete.
 
 ### 2. Classify unresolved threads
 
