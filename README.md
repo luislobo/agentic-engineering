@@ -121,6 +121,9 @@ plugin.json                GitHub Copilot CLI manifest
 docs/                      compatibility contract and decisions
 scripts/                   distribution validation
 tests/                     safety and structure checks
+AGENTS.md                  canonical repository-development instructions
+CLAUDE.md                  Claude Code import of AGENTS.md
+.github/copilot-instructions.md  generated Copilot repository instructions
 ```
 
 See [the compatibility contract](docs/COMPATIBILITY.md), [the design decisions](docs/DECISIONS.md), and [the full notices](NOTICE.md).
