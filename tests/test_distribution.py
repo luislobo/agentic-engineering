@@ -43,6 +43,9 @@ class DistributionTests(unittest.TestCase):
     def test_shared_references_are_synchronized(self):
         validator.validate_shared_references()
 
+    def test_agent_instruction_adapters(self):
+        validator.validate_agent_instructions()
+
     def test_behavioral_eval_contract(self):
         validator.validate_evals()
 
