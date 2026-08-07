@@ -198,6 +198,10 @@ def validate_safety_contracts() -> None:
             "pr-feedback-closure must pause for disposition approval")
     require("Never merge without separate explicit authorization" in closure,
             "pr-feedback-closure must keep merge authorization separate")
+    require("Always retrieve and read suppressed review material" in closure,
+            "pr-feedback-closure must inspect suppressed review material")
+    require("Always read suppressed review material" in status,
+            "pr-readiness must inspect suppressed review material")
     require("allow_implicit_invocation: false" in closure_meta,
             "Codex metadata must disable implicit PR mutation")
     require(not (ROOT / "commands").exists(),
