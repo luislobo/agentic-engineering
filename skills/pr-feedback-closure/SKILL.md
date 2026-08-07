@@ -93,4 +93,5 @@ Lead with the verdict or disposition summary. Include:
 
 ## Credit
 
-This skill packages a PR review lifecycle independently developed by Luis Lobo and later donated for organizational use.
+This lifecycle was independently authored by Luis Lobo and is distributed under the repository
+MIT License.
