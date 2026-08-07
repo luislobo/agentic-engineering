@@ -1,7 +1,7 @@
 {
   "name": "agentic-engineering",
   "description": "A cross-agent software-engineering workflow for explicit decisions, implementation craft, adversarial validation, and safe PR closure.",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": {
     "name": "Luis Lobo",
     "url": "https://github.com/luislobo"
