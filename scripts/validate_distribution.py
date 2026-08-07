@@ -72,9 +72,13 @@ def validate_required_files() -> None:
         ROOT / "docs/COMPATIBILITY.md",
         ROOT / "docs/DECISIONS.md",
         ROOT / "docs/EVALUATION.md",
+        ROOT / "AGENTS.md",
+        ROOT / "CLAUDE.md",
+        ROOT / ".github/copilot-instructions.md",
         ROOT / "evals/cases.json",
         ROOT / "scripts/evaluate_behavior.py",
         ROOT / "scripts/sync_shared_references.py",
+        ROOT / "scripts/sync_agent_instructions.py",
         ROOT / "LICENSES/Peter-Yang-MIT.txt",
         ROOT / "LICENSES/Solid-Skills-MIT-notice.md",
     ]
@@ -234,6 +238,18 @@ def validate_shared_references() -> None:
             "shared PR lifecycle reference drift; run scripts/sync_shared_references.py")
 
 
+def validate_agent_instructions() -> None:
+    canonical = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    claude = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    copilot = (ROOT / ".github/copilot-instructions.md").read_text(encoding="utf-8")
+    require(claude.startswith("@AGENTS.md"),
+            "CLAUDE.md must import the canonical AGENTS.md")
+    require(copilot.endswith(canonical),
+            "Copilot instructions must be generated from AGENTS.md")
+    require("suppressed review material" in canonical,
+            "canonical agent instructions must require suppressed-comment intake")
+
+
 def validate_evals() -> None:
     document = load_json(ROOT / "evals/cases.json")
     require(document.get("schema_version") == 1, "eval cases schema version must be 1")
@@ -285,6 +301,7 @@ def validate_all() -> None:
     validate_safety_contracts()
     validate_instruction_contracts()
     validate_shared_references()
+    validate_agent_instructions()
     validate_evals()
     validate_licensing()
     validate_credits_and_docs()
