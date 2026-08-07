@@ -67,4 +67,5 @@ Lead with the verdict. Include the repository, PR number, and head SHA, then lis
 
 ## Credit
 
-This read-only status workflow was independently developed by Luis Lobo and later donated for organizational use.
+This read-only status workflow was independently authored by Luis Lobo and is distributed under
+the repository MIT License.
