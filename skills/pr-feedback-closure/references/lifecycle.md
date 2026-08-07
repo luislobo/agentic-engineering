@@ -146,8 +146,9 @@ Before declaring the review cycle complete, verify:
 
 ## Source and adaptation
 
-This lifecycle was independently developed by Luis Lobo and later donated for organizational use.
+This lifecycle was independently authored by Luis Lobo.
 
-Luis Lobo's process contributes the two-mode status/review distinction, unresolved-thread triage, ACCEPT/REJECT classification, approval before edits, coherent review-driven changes, original-thread replies, separate thread and comment identifiers, verified zero-unresolved state, merge-readiness reporting, and fresh Copilot review. This packaged form adds owner-decision escalation, connector-first tool routing, authorization boundaries, an Unknown verdict for incomplete evidence, and conflict resolution with the anti-slop rules.
+The source contributes the two-mode status/review distinction, unresolved-thread triage, ACCEPT/REJECT classification, approval before edits, coherent review-driven changes, original-thread replies, separate thread and comment identifiers, verified zero-unresolved state, merge-readiness reporting, and fresh Copilot review. This adaptation adds owner-decision escalation, connector-first tool routing, authorization boundaries, an Unknown verdict for incomplete evidence, and conflict resolution with the anti-slop rules.
 
-Luis Lobo retains authorship of the original process. See [attribution.md](attribution.md).
+Luis Lobo distributes this lifecycle under the repository MIT License. See
+[attribution.md](attribution.md).
