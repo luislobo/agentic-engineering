@@ -9,7 +9,7 @@
       "name": "agentic-engineering",
       "source": "./",
       "description": "Decision-centered software engineering, implementation craft, validation, and PR closure.",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "author": {
         "name": "Luis Lobo"
       },

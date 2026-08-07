@@ -37,6 +37,21 @@ class DistributionTests(unittest.TestCase):
     def test_pr_workflows_preserve_authorization(self):
         validator.validate_safety_contracts()
 
+    def test_instruction_strength_and_context_budget(self):
+        validator.validate_instruction_contracts()
+
+    def test_shared_references_are_synchronized(self):
+        validator.validate_shared_references()
+
+    def test_agent_instruction_adapters(self):
+        validator.validate_agent_instructions()
+
+    def test_behavioral_eval_contract(self):
+        validator.validate_evals()
+
+    def test_licenses_and_third_party_notices(self):
+        validator.validate_licensing()
+
     def test_credits_and_platform_docs_are_present(self):
         validator.validate_credits_and_docs()
 

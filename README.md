@@ -4,6 +4,11 @@ A portable plugin and skill pack for building nontrivial software with coding ag
 
 Created and maintained by [Luis Lobo](https://github.com/luislobo).
 
+This repository is currently distributed privately for Luis Lobo and explicitly authorized
+collaborators. Portability refers to using the same skills across supported agent hosts; it does
+not imply public availability or support. The package is MIT-licensed so authorized copies have
+clear reuse terms and can preserve compatible third-party notices.
+
 ## What it contains
 
 | Skill | Purpose |
@@ -18,7 +23,7 @@ The workflow combines four distinct perspectives:
 1. Josh Bleecher Snyder’s vertically integrated, differential agent engineering.
 2. Ramziddin’s Solid Skills, integrated through Luis Lobo’s fork.
 3. Peter Yang’s human-craft and 25/50/25 concepts, adapted from writing to software engineering.
-4. Luis Lobo’s independently developed PR review lifecycle.
+4. Luis Lobo’s independently authored PR review lifecycle.
 
 They are not collapsed into one doctrine. Outcomes, safety, repository rules, language idioms, and measured evidence decide conflicts.
 
@@ -116,6 +121,9 @@ plugin.json                GitHub Copilot CLI manifest
 docs/                      compatibility contract and decisions
 scripts/                   distribution validation
 tests/                     safety and structure checks
+AGENTS.md                  canonical repository-development instructions
+CLAUDE.md                  Claude Code import of AGENTS.md
+.github/copilot-instructions.md  generated Copilot repository instructions
 ```
 
 See [the compatibility contract](docs/COMPATIBILITY.md), [the design decisions](docs/DECISIONS.md), and [the full notices](NOTICE.md).
@@ -127,6 +135,7 @@ Run:
 ```bash
 python3 scripts/validate_distribution.py
 python3 -m unittest discover -s tests -v
+python3 scripts/evaluate_behavior.py
 ```
 
 CI repeats these checks and validates every skill plus the Codex and Claude package contracts. The validator rejects:
@@ -139,6 +148,21 @@ CI repeats these checks and validates every skill plus the Codex and Claude pack
 - unsafe PR trigger language;
 - platform-specific assumptions in canonical workflows;
 - missing credits or required package files.
+- drift between generated self-contained references;
+- missing MIT and third-party license notices;
+- context-free implementation absolutes and main-skill context-budget regressions;
+- malformed or incomplete behavioral eval definitions.
+
+Structural checks prove that the package is internally consistent. They do not prove that the
+workflow changes agent behavior. See [the behavioral evaluation protocol](docs/EVALUATION.md) for
+fresh-session baseline/treatment trials, hard authorization gates, blind rubric scoring, and
+token/tool/time measurement.
+
+## License
+
+Luis Lobo's original work is available under the [MIT License](LICENSE). Adapted MIT material and
+methodological inspirations are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md),
+[NOTICE.md](NOTICE.md), and the skill-level attribution references.
 
 ## Credits
 
@@ -146,6 +170,6 @@ CI repeats these checks and validates every skill plus the Codex and Claude pack
 - [Josh Bleecher Snyder, “Differential Spec Analysis”](https://commaok.xyz/ai/differential-spec/)
 - [ramziddin/solid-skills](https://github.com/ramziddin/solid-skills) and [luislobo/solid-skills](https://github.com/luislobo/solid-skills)
 - [Peter Yang’s 25/50/25 essay](https://creatoreconomy.so/p/use-my-no-ai-slop-skill-to-remove-20-ai-slop-patterns) and [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop)
-- Luis Lobo’s independently developed PR review lifecycle
+- Luis Lobo’s independently authored PR review lifecycle
 
 See [NOTICE.md](NOTICE.md) and the [detailed attribution](skills/agentic-engineering/references/attribution.md) for pinned revisions, adaptation boundaries, and licensing notes.

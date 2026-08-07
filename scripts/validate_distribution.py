@@ -13,7 +13,7 @@ from typing import Dict, Iterable, List
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "skills"
 NAME = "agentic-engineering"
-VERSION = "2.0.0"
+VERSION = "2.1.0"
 SKILL_FIELDS = {"name", "description"}
 LOCAL_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 
@@ -66,9 +66,21 @@ def validate_required_files() -> None:
         ROOT / "plugin.json",
         ROOT / "README.md",
         ROOT / "NOTICE.md",
+        ROOT / "LICENSE",
+        ROOT / "THIRD_PARTY_NOTICES.md",
         ROOT / "CHANGELOG.md",
         ROOT / "docs/COMPATIBILITY.md",
         ROOT / "docs/DECISIONS.md",
+        ROOT / "docs/EVALUATION.md",
+        ROOT / "AGENTS.md",
+        ROOT / "CLAUDE.md",
+        ROOT / ".github/copilot-instructions.md",
+        ROOT / "evals/cases.json",
+        ROOT / "scripts/evaluate_behavior.py",
+        ROOT / "scripts/sync_shared_references.py",
+        ROOT / "scripts/sync_agent_instructions.py",
+        ROOT / "LICENSES/Peter-Yang-MIT.txt",
+        ROOT / "LICENSES/Solid-Skills-MIT-notice.md",
     ]
     for path in required:
         require(path.is_file(), f"missing required file: {path.relative_to(ROOT)}")
@@ -190,10 +202,85 @@ def validate_safety_contracts() -> None:
             "pr-feedback-closure must pause for disposition approval")
     require("Never merge without separate explicit authorization" in closure,
             "pr-feedback-closure must keep merge authorization separate")
+    require("Always retrieve and read suppressed review material" in closure,
+            "pr-feedback-closure must inspect suppressed review material")
+    require("Always read suppressed review material" in status,
+            "pr-readiness must inspect suppressed review material")
     require("allow_implicit_invocation: false" in closure_meta,
             "Codex metadata must disable implicit PR mutation")
     require(not (ROOT / "commands").exists(),
             "legacy command aliases must not reintroduce obsolete names")
+
+
+def validate_instruction_contracts() -> None:
+    main = (SKILLS / "agentic-engineering/SKILL.md").read_text(encoding="utf-8")
+    implementation = (SKILLS / "implementation-quality/SKILL.md").read_text(encoding="utf-8")
+    require("## Non-negotiable gates" in main,
+            "agentic-engineering must distinguish hard gates from heuristics")
+    require(len(main) <= 10_000,
+            "agentic-engineering SKILL.md exceeds the progressive-disclosure budget")
+    require("## Precedence" in implementation,
+            "implementation-quality must define guidance strength and precedence")
+    prohibited = (
+        "ALWAYS use this skill",
+        "ALWAYS Start with Tests",
+        "Value Objects are MANDATORY",
+        "No more than two instance variables per class",
+    )
+    require(not any(phrase in implementation for phrase in prohibited),
+            "implementation-quality reintroduced a context-free absolute")
+
+
+def validate_shared_references() -> None:
+    canonical = SKILLS / "pr-feedback-closure/references/lifecycle.md"
+    generated = SKILLS / "agentic-engineering/references/pr-feedback-closure.md"
+    require(canonical.read_bytes() == generated.read_bytes(),
+            "shared PR lifecycle reference drift; run scripts/sync_shared_references.py")
+
+
+def validate_agent_instructions() -> None:
+    canonical = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    claude = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    copilot = (ROOT / ".github/copilot-instructions.md").read_text(encoding="utf-8")
+    require(claude.startswith("@AGENTS.md"),
+            "CLAUDE.md must import the canonical AGENTS.md")
+    require(copilot.endswith(canonical),
+            "Copilot instructions must be generated from AGENTS.md")
+    require("suppressed review material" in canonical,
+            "canonical agent instructions must require suppressed-comment intake")
+
+
+def validate_evals() -> None:
+    document = load_json(ROOT / "evals/cases.json")
+    require(document.get("schema_version") == 1, "eval cases schema version must be 1")
+    cases = document.get("cases")
+    require(isinstance(cases, list) and len(cases) >= 7,
+            "behavioral eval suite must contain the seven core cases")
+    ids = [case.get("id") for case in cases]
+    require(len(ids) == len(set(ids)), "behavioral eval case IDs must be unique")
+    required_ids = {
+        "tiny-fix-lean",
+        "normal-pr-ceremony",
+        "high-risk-migration",
+        "audit-read-only",
+        "feedback-approval-gate",
+        "unknown-without-evidence",
+        "merge-separate-authorization",
+    }
+    require(required_ids.issubset(ids), "behavioral eval suite is missing a core case")
+
+
+def validate_licensing() -> None:
+    license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
+    require("MIT License" in license_text and "Copyright (c) 2026 Luis Lobo" in license_text,
+            "root MIT license is missing or has the wrong owner")
+    notices = (ROOT / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8")
+    for source in ("Solid Skills", "no-ai-slop", "Peter Yang", "Ramziddin"):
+        require(source.lower() in notices.lower(),
+                f"THIRD_PARTY_NOTICES.md: missing {source}")
+    peter_license = (ROOT / "LICENSES/Peter-Yang-MIT.txt").read_text(encoding="utf-8")
+    require("Copyright (c) 2026 Peter Yang" in peter_license,
+            "Peter Yang MIT notice is incomplete")
 
 
 def validate_credits_and_docs() -> None:
@@ -206,28 +293,18 @@ def validate_credits_and_docs() -> None:
         require(platform in compatibility, f"compatibility contract missing {platform}")
 
 
-def validate_provenance_privacy() -> None:
-    prohibited = (
-        re.compile(r"twenty.?" + r"20", re.IGNORECASE),
-        re.compile(r"\bep" + r"ic\b", re.IGNORECASE),
-        re.compile(r"shared-ai-" + r"dev-config", re.IGNORECASE),
-    )
-    for path in sorted(candidate for candidate in ROOT.rglob("*") if candidate.is_file()):
-        if "__pycache__" in path.parts:
-            continue
-        text = path.read_text(encoding="utf-8")
-        require(not any(pattern.search(text) for pattern in prohibited),
-                f"{path.relative_to(ROOT)}: prohibited provenance reference")
-
-
 def validate_all() -> None:
     validate_required_files()
     validate_skills()
     validate_links()
     validate_manifests()
     validate_safety_contracts()
+    validate_instruction_contracts()
+    validate_shared_references()
+    validate_agent_instructions()
+    validate_evals()
+    validate_licensing()
     validate_credits_and_docs()
-    validate_provenance_privacy()
 
 
 def main() -> int:

@@ -14,6 +14,12 @@ The canonical source of behavior is `skills/*/SKILL.md` plus files contained ins
 8. Every manifest exposes the same canonical `skills/` tree.
 9. Skills use the same outcome-oriented identifiers on every host.
 10. Credits and adaptation boundaries remain visible in the distributed package.
+11. Host-required Markdown remains the portable runtime format; alternative source
+    representations must generate or verify equivalent self-contained skills.
+12. Intentionally duplicated safety references have one declared canonical source and are
+    byte-verified in CI.
+13. Repository-development guidance uses AGENTS.md as canonical, CLAUDE.md as a native import, and
+    a generated Copilot repository instruction file; symlinks are not required.
 
 ## Platform mapping
 
