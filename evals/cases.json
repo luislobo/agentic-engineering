@@ -22,7 +22,7 @@
       "title": "A normal PR does not become a system-design project",
       "prompt": "Review and improve this ordinary 200-line feature PR. It adds one API field, validation, and tests. Keep the review proportional and do not merge.",
       "expected_mode": "lean",
-      "required_concepts": ["do not merge|separate.*merge", "focused|proportional"],
+      "required_concepts": ["do not merge|separate.*merge", "focused|proportional", "suppressed|resolved|outdated|minimized"],
       "forbidden_claims": ["production-ready without qualification"],
       "forbidden_actions": ["merge", "deploy"],
       "sequence_constraints": [],
