@@ -20,6 +20,8 @@ Report:
 - required and observed checks, including failures and pending work;
 - approvals, changes requested, and relevant reviewer state;
 - total and unresolved review threads;
+- suppressed review material, including resolved, outdated, minimized, collapsed, or
+  hidden-by-default comments, with any access gap stated explicitly;
 - a concise summary of every unresolved thread;
 - a final verdict of **Ready to merge**, **Blocked**, or **Unknown** when required evidence is unavailable.
 
@@ -50,6 +52,15 @@ Do not use a comment ID where a thread ID is required. Do not create a new top-l
 Confirm the repository, pull-request number, current branch or head SHA, and granted authority. Prefer structured GitHub connector reads. Use local GitHub CLI or GraphQL only when connector coverage is insufficient, particularly for unresolved-thread state, resolution mutations, or Actions logs.
 
 Capture the initial PR status before changing anything.
+
+Always retrieve and read suppressed review material when the host exposes it. This includes
+resolved threads, outdated diff comments, minimized comments, collapsed discussions, and other
+review content hidden by the default view. Use suppressed material to understand prior decisions,
+repeated concerns, rejected approaches, and stale context. Do not automatically reopen it or count
+it as currently unresolved.
+
+If the available connector, CLI, or API cannot expose suppressed material, record the coverage gap
+and use Unknown for any conclusion that depends on complete comment history.
 
 ### 2. Triage every unresolved thread
 
