@@ -8,6 +8,7 @@
 - Generate and verify the duplicated PR lifecycle reference.
 - License original work under MIT and preserve compatible third-party notices.
 - Add negative tests for drift, instruction conflicts, and missing licensing.
+- Require PR workflows to retrieve and inspect suppressed review material.
 
 ## 2.0.0 — 2026-07-23
 
