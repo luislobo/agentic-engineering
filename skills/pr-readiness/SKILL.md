@@ -32,9 +32,13 @@ If the user asks to address review feedback, stop the readiness workflow and use
    - required and observed checks, including pending, skipped, cancelled, and failing checks;
    - approvals, active changes-requested reviews, and required reviewer state;
    - total and unresolved review threads, with a concise summary of each unresolved concern;
+   - suppressed review material, including resolved, outdated, minimized, collapsed, and
+     hidden-by-default comments, using it as context without counting it as unresolved;
    - repository-specific policy blockers.
 4. Prefer the host agent's connected GitHub integration. Use local GitHub CLI or GraphQL only when read-only connector coverage is insufficient, especially for unresolved-thread state or Actions logs.
-5. Do not infer missing state. If access or synchronization prevents a reliable conclusion, identify the unavailable evidence.
+5. Always read suppressed review material when the host exposes it. Do not infer missing state. If
+   access or synchronization prevents complete comment coverage or another reliable conclusion,
+   identify the unavailable evidence.
 6. Report one verdict:
    - **Ready to merge**: every applicable readiness condition is known to pass.
    - **Blocked**: at least one concrete blocker is present.
