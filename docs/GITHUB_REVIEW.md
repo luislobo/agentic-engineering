@@ -38,6 +38,38 @@ GitHub review. Automatic Codex reviews may be enabled in repository settings ins
 is additional evidence; it does not replace tests, deterministic CI, branch protection, or required
 human approval.
 
+## Claude by Anthropic
+
+Claude has two GitHub integrations with different behavior:
+
+- **Managed Claude Code Review:** available for Team and Enterprise organizations after an owner
+  enables Code Review and installs the Claude GitHub App. A top-level `@claude review` comment
+  requests one review. `@claude review always` also subscribes the PR to a fresh review on each
+  subsequent push. Managed Code Review usage is billed separately.
+- **Claude Code GitHub Action:** install the Claude GitHub App and configure
+  `anthropics/claude-code-action`. Its default interactive trigger is `@claude`, so a request such
+  as `@claude review this PR for correctness and regressions` asks the Action to perform a review.
+  It can authenticate with an Anthropic API key or an eligible Claude subscription token. A
+  workflow can instead invoke the `code-review` plugin automatically on PR events.
+
+For local review without a GitHub integration, Claude Code supports `/code-review <PR-number>`;
+`--comment` posts findings when the authenticated session has permission. Local review is not an
+independent GitHub check unless its findings are posted or captured by CI.
+
+## Google Antigravity
+
+Antigravity has no universal GitHub mention equivalent to `@codex review` or `@claude review`.
+Use one of these documented patterns:
+
+- run the installed review skill interactively in Antigravity CLI against the branch or PR;
+- build a GitHub Action with the Antigravity SDK that reviews PRs automatically and posts its
+  report as a PR comment;
+- configure that Action with a repository-defined on-demand comment such as `/review`.
+
+`/review` is only an example custom trigger. Document the chosen trigger in the repository and do
+not claim that it is built into Antigravity. Keep the review agent's repository access read-only;
+grant the narrow posting step permission to write PR comments.
+
 ## Other agents
 
 Use the active agent's documented GitHub app, review request, or comment trigger. Do not invent a
@@ -76,4 +108,9 @@ the unsafe outcome, and the safe path. Leave formatting, lint, and other determi
 Provider-specific setup belongs in integration documentation or repository settings, not in the
 portable skill workflow.
 
-Official Codex setup and trigger details: [Review GitHub pull requests with Codex](https://learn.chatgpt.com/docs/third-party/github).
+Official integration details:
+
+- [Review GitHub pull requests with Codex](https://learn.chatgpt.com/docs/third-party/github)
+- [Claude Code Review](https://code.claude.com/docs/en/code-review)
+- [Claude Code GitHub Actions](https://code.claude.com/docs/en/github-actions)
+- [Antigravity CLI and SDK code review](https://codelabs.developers.google.com/agy-cli-sdk-code-review)

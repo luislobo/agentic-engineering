@@ -347,7 +347,18 @@ def validate_credits_and_docs() -> None:
         require(platform in compatibility, f"compatibility contract missing {platform}")
 
     github_review = (ROOT / "docs/GITHUB_REVIEW.md").read_text(encoding="utf-8")
-    for contract in ("Copilot is optional", "@codex review", "gh", "GraphQL", "Unknown"):
+    for contract in (
+        "Copilot is optional",
+        "@codex review",
+        "@claude review",
+        "@claude review always",
+        "Claude Code GitHub Action",
+        "Antigravity has no universal GitHub mention",
+        "repository-defined on-demand comment",
+        "gh",
+        "GraphQL",
+        "Unknown",
+    ):
         require(contract in github_review,
                 f"GitHub review contract missing: {contract}")
 

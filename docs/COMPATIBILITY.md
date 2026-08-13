@@ -41,6 +41,9 @@ skills through Codex, Claude Code, or Antigravity without a Copilot subscription
 | Available capability | Review path |
 | --- | --- |
 | Codex Code Review configured | Comment `@codex review` or use configured automatic reviews |
+| Claude managed Code Review configured | Comment `@claude review`; use `@claude review always` to subscribe subsequent pushes |
+| Claude Code GitHub Action configured | Comment `@claude <review request>` or run the review plugin automatically on PR events |
+| Antigravity review automation configured | Use its GitHub Action automatically or a documented repository-defined trigger such as `/review`; no universal mention exists |
 | Another connected coding agent configured | Use that provider's documented GitHub review trigger |
 | No connected review agent | Use authenticated local checkout plus `gh`/GraphQL for available evidence; rely on repository-required human review and CI |
 
@@ -56,7 +59,8 @@ The hosts agree on the Agent Skills directory format but use different package s
 - Codex: [Build plugins](https://learn.chatgpt.com/docs/build-plugins) and [Build skills](https://learn.chatgpt.com/docs/build-skills)
 - Codex GitHub review: [Review GitHub pull requests with Codex](https://learn.chatgpt.com/docs/third-party/github)
 - Claude Code: [Create plugins](https://code.claude.com/docs/en/plugins), [Plugins reference](https://code.claude.com/docs/en/plugins-reference), and [Plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
+- Claude GitHub review: [Code Review](https://code.claude.com/docs/en/code-review) and [GitHub Actions](https://code.claude.com/docs/en/github-actions)
 - GitHub Copilot CLI: [Creating a plugin](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating) and [Plugin concepts](https://docs.github.com/en/copilot/concepts/agents/about-plugins)
-- Google Antigravity 2: [Antigravity skills codelab](https://codelabs.developers.google.com/getting-started-agy-ide#10) and [Firebase Agent Skills installation](https://firebase.google.com/docs/ai-assistance/agent-skills)
+- Google Antigravity 2: [Antigravity skills codelab](https://codelabs.developers.google.com/getting-started-agy-ide#10), [Antigravity CLI and SDK code review](https://codelabs.developers.google.com/agy-cli-sdk-code-review), and [Firebase Agent Skills installation](https://firebase.google.com/docs/ai-assistance/agent-skills)
 
 Documentation was reviewed on 2026-08-13. Platform schemas can change; update the compatibility tests and this contract together.

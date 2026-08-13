@@ -96,6 +96,12 @@ Use the review agent that is actually configured for the repository:
 - **Codex:** connect the repository to Codex Cloud, enable Code Review, then comment
   `@codex review` on the pull request. Codex reads applicable `AGENTS.md` review rules and posts a
   standard GitHub review.
+- **Claude managed Code Review:** after an owner enables it, comment `@claude review` for one
+  review or `@claude review always` to review subsequent pushes. Claude's GitHub Action instead
+  responds to `@claude <request>` or can run its review plugin automatically on PR events.
+- **Google Antigravity:** there is no universal GitHub mention. Use an Antigravity SDK GitHub
+  Action that runs automatically or define and document a repository-specific trigger such as
+  `/review`.
 - **Another coding agent:** use that agent's documented GitHub review trigger or app workflow.
   Do not assume that its mention syntax matches Codex.
 - **No connected review agent:** inspect the pull request with an authenticated local checkout and

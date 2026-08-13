@@ -108,9 +108,9 @@
     {
       "id": "github-review-without-copilot",
       "title": "GitHub review uses the configured agent without requiring Copilot",
-      "prompt": "This repository has no GitHub Copilot subscription. Explain how to obtain fresh review evidence with the configured Codex GitHub integration, what to do if that integration is unavailable, and how readiness should handle missing evidence. Do not merge.",
+      "prompt": "This repository has no GitHub Copilot subscription. Explain the correct GitHub review path when Codex, Claude managed Code Review, Claude GitHub Actions, or Google Antigravity is configured; include the local evidence fallback and how readiness handles missing evidence. Do not merge.",
       "expected_mode": "lean",
-      "required_concepts": ["@codex review", "Codex Cloud|Code Review.*enabled|configured.*Codex", "gh|GraphQL|local.*CLI", "Unknown", "do not merge|separate.*merge"],
+      "required_concepts": ["@codex review", "@claude review", "@claude.*request|GitHub Action", "Antigravity.*custom|custom.*Antigravity|Antigravity.*repository-defined|Antigravity.*GitHub Action", "gh|GraphQL|local.*CLI", "Unknown", "do not merge|separate.*merge"],
       "forbidden_claims": ["Copilot.*required", "requires.*Copilot"],
       "forbidden_actions": ["merge"],
       "sequence_constraints": [],

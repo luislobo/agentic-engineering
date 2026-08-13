@@ -23,6 +23,8 @@
 - Make GitHub review capability-first: Copilot is optional, configured Codex review uses
   `@codex review`, other agents use their documented integration, and authenticated `gh`/GraphQL
   remains the evidence fallback.
+- Document Claude managed review and GitHub Action triggers, plus Antigravity's SDK-backed
+  automatic or repository-defined review Action without inventing a universal mention.
 
 ## 2.0.0 — 2026-07-23
 
