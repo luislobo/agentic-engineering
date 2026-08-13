@@ -25,6 +25,7 @@ class DistributionTests(unittest.TestCase):
                 "implementation-quality",
                 "pr-readiness",
                 "pr-feedback-closure",
+                "reliable-ai-coding",
             },
         )
 

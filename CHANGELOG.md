@@ -2,6 +2,13 @@
 
 ## 2.1.0 - Unreleased
 
+- Add the self-contained `reliable-ai-coding` skill for precise task contracts, targeted context,
+  bounded tool use, objective verification, multimodal inputs, and efficient prompt reuse.
+- Add prompt recipes, a tool and caching guide, a 30-day practice plan, and a review scorecard
+  adapted from the supplied *Building Toward Computer Use with Anthropic* subtitles.
+- Extend package validation, tests, documentation, and behavioral evals for the fifth skill.
+- Add skill-selection recipes defining the always-present controls, primary-versus-companion
+  model, escalation rules, safe PR sequencing, and copy-ready combined prompts.
 - Add a behavioral evaluation contract for proportionality, evidence, and authorization.
 - Reduce the main skill through progressive disclosure and explicit hard gates.
 - Recast implementation-quality absolutes as defaults and scrutiny prompts.
