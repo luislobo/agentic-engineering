@@ -40,12 +40,21 @@ class ValidatorFailureTests(unittest.TestCase):
             implementation.parent.mkdir(parents=True)
             reliable.parent.mkdir(parents=True)
             routing.parent.mkdir(parents=True)
-            main.write_text("## Non-negotiable gates\n", encoding="utf-8")
+            main.write_text(
+                "---\nname: agentic-engineering\n"
+                "description: Use reliable-ai-coding instead for ordinary work.\n---\n"
+                "## Non-negotiable gates\n",
+                encoding="utf-8",
+            )
             implementation.write_text(
+                "---\nname: implementation-quality\n"
+                "description: Use when reliable-ai-coding or agentic-engineering invokes it.\n---\n"
                 "## Precedence\nValue Objects are MANDATORY\n",
                 encoding="utf-8",
             )
             reliable.write_text(
+                "---\nname: reliable-ai-coding\n"
+                "description: Defer greenfield systems to agentic-engineering.\n---\n"
                 "## Required gates\nInspect before edit\nEvidence before acceptance\n",
                 encoding="utf-8",
             )

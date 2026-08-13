@@ -115,7 +115,11 @@ Do not resolve an OWNER DECISION item, a failing fix, or a concern awaiting revi
 
 Fetch current thread state after replies and resolutions. Confirm zero unresolved threads or list each remaining blocker. Re-run affected checks when the final change can invalidate earlier evidence.
 
-When supported and authorized, request a fresh reviewer or Copilot pass after the reviewed changes are available. Treat the new review as new evidence, not as a ceremonial step.
+When supported and authorized, request a fresh connected-agent review after the reviewed changes
+are available. For configured Codex Code Review, use `@codex review`; for another agent, use its
+documented GitHub review trigger. Copilot is optional. Treat the new review as new evidence, not
+as a ceremonial step. If no agent review integration is configured, rely on required human review,
+repository policy, and CI without pretending that an agent review occurred.
 
 ### 7. Report merge readiness
 
@@ -159,7 +163,7 @@ Before declaring the review cycle complete, verify:
 
 This lifecycle was independently authored by Luis Lobo.
 
-The source contributes the two-mode status/review distinction, unresolved-thread triage, ACCEPT/REJECT classification, approval before edits, coherent review-driven changes, original-thread replies, separate thread and comment identifiers, verified zero-unresolved state, merge-readiness reporting, and fresh Copilot review. This adaptation adds owner-decision escalation, connector-first tool routing, authorization boundaries, an Unknown verdict for incomplete evidence, and conflict resolution with the anti-slop rules.
+The source contributes the two-mode status/review distinction, unresolved-thread triage, ACCEPT/REJECT classification, approval before edits, coherent review-driven changes, original-thread replies, separate thread and comment identifiers, verified zero-unresolved state, merge-readiness reporting, and optional fresh agent review. This adaptation adds owner-decision escalation, connector-first tool routing, authorization boundaries, an Unknown verdict for incomplete evidence, and conflict resolution with the anti-slop rules.
 
 Luis Lobo distributes this lifecycle under the repository MIT License. See
 [attribution.md](attribution.md).

@@ -1,6 +1,6 @@
 ---
 name: implementation-quality
-description: Apply context-sensitive TDD, SOLID, clean-code, object-design, testing, complexity, and architecture heuristics during implementation planning, coding, refactoring, debugging, or review. Use when the user requests implementation-quality guidance or when agentic-engineering invokes this companion perspective. Never override explicit behavior, safety, repository conventions, language idioms, compatibility, or measured evidence.
+description: Apply context-sensitive TDD, SOLID, clean-code, object-design, testing, complexity, and architecture heuristics during implementation planning, coding, refactoring, debugging, or review. Use when the user requests implementation-quality guidance or when reliable-ai-coding or agentic-engineering invokes this companion perspective. Never override explicit behavior, safety, repository conventions, language idioms, compatibility, or measured evidence.
 ---
 
 # Implementation Quality

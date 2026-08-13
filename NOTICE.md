@@ -19,7 +19,7 @@ MIT License.
 
 Luis Lobo's original work is distributed under the [MIT License](LICENSE). Complete preserved
 license text and source-to-path mappings for adapted material appear in
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and LICENSES/. See each skill's credit section and
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and LICENSES/. See the skill-level attribution references in
 [`skills/agentic-engineering/references/attribution.md`](skills/agentic-engineering/references/attribution.md)
 and [`skills/reliable-ai-coding/references/attribution.md`](skills/reliable-ai-coding/references/attribution.md)
 for exact adaptation boundaries.

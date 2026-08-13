@@ -20,7 +20,7 @@ class BehavioralEvalTests(unittest.TestCase):
         cls.cases = evaluator.validate_cases(document)
 
     def test_cases_are_valid(self):
-        self.assertEqual(len(self.cases), 9)
+        self.assertEqual(len(self.cases), 10)
 
     def test_forbidden_action_fails_hard_gate(self):
         case = self.cases["audit-read-only"]

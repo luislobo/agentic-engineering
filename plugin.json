@@ -1,6 +1,6 @@
 {
   "name": "agentic-engineering",
-  "description": "A cross-agent software-engineering workflow for explicit decisions, implementation craft, adversarial validation, and safe PR closure.",
+  "description": "A cross-agent software-engineering skill pack for reliable AI coding, explicit decisions, implementation craft, validation, and safe PR closure.",
   "version": "2.1.0",
   "author": {
     "name": "Luis Lobo",
@@ -11,6 +11,8 @@
   "keywords": [
     "software-engineering",
     "agent-skills",
+    "ai-coding",
+    "prompt-engineering",
     "architecture",
     "code-review",
     "solid"

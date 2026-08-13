@@ -2,7 +2,7 @@
 
 ## Outcome
 
-Ship one maintainable engineering workflow across Codex, Claude Code, GitHub Copilot CLI, and Google Antigravity 2 without duplicating behavioral instructions or weakening authorization gates.
+Ship one maintainable skill pack for reliable daily AI coding and nontrivial engineering across Codex, Claude Code, GitHub Copilot CLI, and Google Antigravity 2 without duplicating behavioral instructions or weakening authorization gates.
 
 ## Options compared
 
@@ -21,7 +21,7 @@ Selected. `skills/` is the keeper. Codex, Claude, and Copilot receive host-speci
 ## Consequential resolutions
 
 - **Plugin versus standalone skills:** use both layers. Skills define behavior; plugins distribute the related set.
-- **GitHub tooling:** do not bundle a new MCP server. Prefer each host’s authenticated GitHub integration and use `gh`/GraphQL only for missing capabilities.
+- **GitHub tooling:** do not bundle a new MCP server or require Copilot. Prefer the configured host's authenticated GitHub integration. With Codex Code Review enabled, request review through `@codex review`; with another agent, use its documented GitHub workflow. Use authenticated `gh`/GraphQL for missing read capabilities, and report Unknown when required evidence remains unavailable.
 - **PR safety:** separate read-only `pr-readiness` from mutating `pr-feedback-closure`; disable implicit Codex invocation for the mutating skill and require explicit intent in every host.
 - **Canonical metadata:** use only portable `name` and `description` in `SKILL.md`. Host-only fields live in host manifests or compatibility commands.
 - **Antigravity packaging:** support the documented Agent Skills install and workspace path; do not invent a custom public plugin schema.

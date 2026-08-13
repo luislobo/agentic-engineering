@@ -18,6 +18,11 @@
 - Require PR workflows to retrieve and inspect suppressed review material.
 - Add native Codex, Claude Code, and Copilot repository instruction entry points generated from
   one AGENTS.md source.
+- Disambiguate ordinary `reliable-ai-coding` work from consequential `agentic-engineering` work
+  and align the `implementation-quality` companion trigger across both workflows.
+- Make GitHub review capability-first: Copilot is optional, configured Codex review uses
+  `@codex review`, other agents use their documented integration, and authenticated `gh`/GraphQL
+  remains the evidence fallback.
 
 ## 2.0.0 — 2026-07-23
 

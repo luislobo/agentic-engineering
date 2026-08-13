@@ -1,6 +1,6 @@
 ---
 name: reliable-ai-coding
-description: Use when turning an engineering task into a bounded AI-coding workflow, choosing and combining the agentic-engineering skill pack, improving prompts or context packets, defining tool permissions and stop conditions, or checking whether an AI-generated change has enough evidence. Applies to features, bugs, refactors, architecture, DevOps, and multimodal work. Do not use as a replacement for repository instructions, security policy, or the risk-scaled system design provided by agentic-engineering.
+description: Use when turning an ordinary feature, bug, bounded refactor, local automation, prompt, or context task into a reliable AI-coding workflow with explicit permissions and verification. Also use when choosing and combining this skill pack or checking AI-generated work for evidence. Defer greenfield systems, major subsystems, consequential architecture, and security-, data-, concurrency-, migration-, or operations-critical work to agentic-engineering. Never replace repository instructions or security policy.
 ---
 
 # Reliable AI Coding

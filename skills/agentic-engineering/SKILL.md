@@ -1,6 +1,6 @@
 ---
 name: agentic-engineering
-description: Design and deliver nontrivial software systems with coding agents through risk-scaled research, explicit decisions, independent alternatives, differential analysis, keeper implementation, adversarial validation, and staged rollout. Use for greenfield systems, major subsystems, consequential architecture or failure-semantics choices, or underspecified product goals, especially when work is distributed, concurrent, security-sensitive, data-critical, or operationally risky. Do not trigger for tiny isolated edits unless explicitly requested.
+description: Design and deliver nontrivial software systems with coding agents through risk-scaled research, explicit decisions, independent alternatives, differential analysis, keeper implementation, adversarial validation, and staged rollout. Use for greenfield systems, major subsystems, consequential architecture or failure-semantics choices, or underspecified product goals, especially when work is distributed, concurrent, security-sensitive, data-critical, or operationally risky. Use reliable-ai-coding instead for ordinary features, bugs, bounded refactors, prompt or context work, and local automation unless this workflow is explicitly requested.
 ---
 
 # Agentic Engineering
