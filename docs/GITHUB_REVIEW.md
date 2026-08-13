@@ -47,10 +47,12 @@ Claude has two GitHub integrations with different behavior:
   requests one review. `@claude review always` also subscribes the PR to a fresh review on each
   subsequent push. Managed Code Review usage is billed separately.
 - **Claude Code GitHub Action:** install the Claude GitHub App and configure
-  `anthropics/claude-code-action`. Its default interactive trigger is `@claude`, so a request such
-  as `@claude review this PR for correctness and regressions` asks the Action to perform a review.
-  It can authenticate with an Anthropic API key or an eligible Claude subscription token. A
-  workflow can instead invoke the `code-review` plugin automatically on PR events.
+  `anthropics/claude-code-action`. In interactive mode, with comment events configured and no
+  `prompt` input, its default trigger is `@claude`; for example,
+  `@claude review this PR for correctness and regressions`. In automation mode, it runs the
+  workflow's configured `prompt` on the selected GitHub event and does not wait for a mention. It
+  can authenticate with an Anthropic API key or an eligible Claude subscription token. A workflow
+  can invoke the `code-review` plugin automatically on PR events.
 
 For local review without a GitHub integration, Claude Code supports `/code-review <PR-number>`;
 `--comment` posts findings when the authenticated session has permission. Local review is not an
@@ -67,8 +69,12 @@ Use one of these documented patterns:
 - configure that Action with a repository-defined on-demand comment such as `/review`.
 
 `/review` is only an example custom trigger. Document the chosen trigger in the repository and do
-not claim that it is built into Antigravity. Keep the review agent's repository access read-only;
-grant the narrow posting step permission to write PR comments.
+not claim that it is built into Antigravity. Keep the SDK agent deny-by-default and do not expose a
+writable GitHub credential to its process. GitHub Actions `permissions` are scoped to a workflow or
+job, not an individual step. For strongest isolation, run the read-only review in one job, pass its
+report as an artifact, and post it from a separate job with `pull-requests: write`. A simpler
+single-job workflow must rely on the agent's tool policy and avoid passing the job token to the
+agent process before a separate posting action consumes the report.
 
 ## Other agents
 

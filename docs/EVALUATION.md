@@ -10,7 +10,8 @@ evals/cases.json covers narrow fixes, an ordinary PR, a high-risk migration, aud
 approval-gated feedback closure, incomplete readiness evidence, separate merge authorization,
 an everyday AI-coding task that must inspect before editing and finish with evidence, and a
 skill-routing case that selects one primary plus a distinct companion without stacking workflows,
-and GitHub review through configured Codex or local evidence fallback without requiring Copilot.
+and GitHub review through configured Codex, Claude managed review, Claude GitHub Actions,
+Antigravity automation, or local evidence fallback without requiring Copilot.
 Each case defines deterministic hard gates and a small human-scored rubric.
 
 Validate the suite with:

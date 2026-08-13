@@ -97,8 +97,9 @@ Use the review agent that is actually configured for the repository:
   `@codex review` on the pull request. Codex reads applicable `AGENTS.md` review rules and posts a
   standard GitHub review.
 - **Claude managed Code Review:** after an owner enables it, comment `@claude review` for one
-  review or `@claude review always` to review subsequent pushes. Claude's GitHub Action instead
-  responds to `@claude <request>` or can run its review plugin automatically on PR events.
+  review or `@claude review always` to review subsequent pushes. A Claude GitHub Action in
+  interactive mode responds to `@claude <request>`; automation mode can run its review plugin on
+  configured PR events without waiting for a mention.
 - **Google Antigravity:** there is no universal GitHub mention. Use an Antigravity SDK GitHub
   Action that runs automatically or define and document a repository-specific trigger such as
   `/review`.

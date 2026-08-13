@@ -42,7 +42,8 @@ skills through Codex, Claude Code, or Antigravity without a Copilot subscription
 | --- | --- |
 | Codex Code Review configured | Comment `@codex review` or use configured automatic reviews |
 | Claude managed Code Review configured | Comment `@claude review`; use `@claude review always` to subscribe subsequent pushes |
-| Claude Code GitHub Action configured | Comment `@claude <review request>` or run the review plugin automatically on PR events |
+| Claude Code GitHub Action in interactive mode | Comment `@claude <review request>` when comment events are configured and no prompt input is set |
+| Claude Code GitHub Action in automation mode | Run the configured prompt or review plugin on selected PR events; it does not wait for a mention |
 | Antigravity review automation configured | Use its GitHub Action automatically or a documented repository-defined trigger such as `/review`; no universal mention exists |
 | Another connected coding agent configured | Use that provider's documented GitHub review trigger |
 | No connected review agent | Use authenticated local checkout plus `gh`/GraphQL for available evidence; rely on repository-required human review and CI |

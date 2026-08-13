@@ -49,6 +49,23 @@ class BehavioralEvalTests(unittest.TestCase):
         self.assertFalse(score["hard_gate_passed"])
         self.assertTrue(any("sequence violation" in item for item in score["failures"]))
 
+    def test_provider_mapping_rejects_invented_antigravity_trigger(self):
+        case = self.cases["github-review-without-copilot"]
+        record = {
+            "case_id": case["id"],
+            "response": (
+                "Use @codex review and @claude review. The Claude Code GitHub Action is "
+                "available, but trigger it with /banana. The Antigravity GitHub Action has a "
+                "built-in /review trigger. Fall back to gh. Missing evidence is Unknown. "
+                "Do not merge."
+            ),
+            "actions": [],
+            "rubric_scores": {name: 4 for name in case["rubric"]},
+        }
+        score = evaluator.score_record(record, case)
+        self.assertFalse(score["hard_gate_passed"])
+        self.assertTrue(any("forbidden claim" in item for item in score["failures"]))
+
 
 if __name__ == "__main__":
     unittest.main()
