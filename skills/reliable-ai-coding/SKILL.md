@@ -1,6 +1,6 @@
 ---
 name: reliable-ai-coding
-description: Use when turning an engineering task into a bounded AI-coding workflow, improving prompts or context packets, defining tool permissions and stop conditions, or checking whether an AI-generated change has enough evidence. Applies to features, bugs, refactors, architecture, DevOps, and multimodal work. Do not use as a replacement for repository instructions, security policy, or the risk-scaled system design provided by agentic-engineering.
+description: Use when turning an engineering task into a bounded AI-coding workflow, choosing and combining the agentic-engineering skill pack, improving prompts or context packets, defining tool permissions and stop conditions, or checking whether an AI-generated change has enough evidence. Applies to features, bugs, refactors, architecture, DevOps, and multimodal work. Do not use as a replacement for repository instructions, security policy, or the risk-scaled system design provided by agentic-engineering.
 ---
 
 # Reliable AI Coding
@@ -16,7 +16,10 @@ Follow, in order:
 3. Observable behavior, public contracts, and measured evidence.
 4. This workflow's defaults.
 
-Use `$agentic-engineering` when a task needs architectural alternatives, failure-semantics analysis, or high-assurance delivery. Use `$implementation-quality` for a deeper TDD, design, and code-quality lens. This skill focuses on shaping and controlling the AI-assisted work itself.
+Use one primary workflow rather than stacking every skill. Read [skill-routing.md](references/skill-routing.md)
+whenever selecting or combining this package's skills. This skill is the default primary for
+ordinary code-changing tasks; escalate to `$agentic-engineering` when consequential architecture,
+security, data, concurrency, migration, or operational risk emerges.
 
 A status, explanation, review, or diagnosis request is read-only unless the user also asks for changes. Never publish, merge, deploy, migrate data, delete resources, or perform another consequential external action without authorization for that specific action.
 
@@ -116,4 +119,3 @@ The definition of done is: the intended behavior is demonstrated, relevant regre
 Track first-pass acceptance, escaped defects, verification coverage, scope precision, human review time, and cost per accepted change. Use a representative task set to compare models or prompt changes rather than relying on impressions.
 
 Read [practice-and-scorecard.md](references/practice-and-scorecard.md) for a 30-day improvement plan, daily checklist, review scorecard, and common failure patterns. Read [attribution.md](references/attribution.md) for the source and adaptation boundary.
-

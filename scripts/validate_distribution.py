@@ -72,6 +72,7 @@ def validate_required_files() -> None:
         ROOT / "docs/COMPATIBILITY.md",
         ROOT / "docs/DECISIONS.md",
         ROOT / "docs/EVALUATION.md",
+        ROOT / "docs/SKILL_RECIPES.md",
         ROOT / "AGENTS.md",
         ROOT / "CLAUDE.md",
         ROOT / ".github/copilot-instructions.md",
@@ -222,6 +223,9 @@ def validate_instruction_contracts() -> None:
     main = (SKILLS / "agentic-engineering/SKILL.md").read_text(encoding="utf-8")
     implementation = (SKILLS / "implementation-quality/SKILL.md").read_text(encoding="utf-8")
     reliable = (SKILLS / "reliable-ai-coding/SKILL.md").read_text(encoding="utf-8")
+    routing = (SKILLS / "reliable-ai-coding/references/skill-routing.md").read_text(
+        encoding="utf-8",
+    )
     require("## Non-negotiable gates" in main,
             "agentic-engineering must distinguish hard gates from heuristics")
     require(len(main) <= 10_000,
@@ -242,6 +246,13 @@ def validate_instruction_contracts() -> None:
             "reliable-ai-coding must preserve inspect-before-edit and evidence gates")
     require(len(reliable) <= 10_000,
             "reliable-ai-coding SKILL.md exceeds the progressive-disclosure budget")
+    for contract in (
+        "one primary",
+        "Escalate from `reliable-ai-coding` to `agentic-engineering`",
+        "sequentially, not simultaneously",
+    ):
+        require(contract in routing,
+                f"reliable-ai-coding routing contract missing: {contract}")
 
 
 def validate_shared_references() -> None:
@@ -267,8 +278,8 @@ def validate_evals() -> None:
     document = load_json(ROOT / "evals/cases.json")
     require(document.get("schema_version") == 1, "eval cases schema version must be 1")
     cases = document.get("cases")
-    require(isinstance(cases, list) and len(cases) >= 8,
-            "behavioral eval suite must contain the eight core cases")
+    require(isinstance(cases, list) and len(cases) >= 9,
+            "behavioral eval suite must contain the nine core cases")
     ids = [case.get("id") for case in cases]
     require(len(ids) == len(set(ids)), "behavioral eval case IDs must be unique")
     required_ids = {
@@ -280,6 +291,7 @@ def validate_evals() -> None:
         "unknown-without-evidence",
         "merge-separate-authorization",
         "bounded-ai-coding-task",
+        "skill-routing-meaningful-feature",
     }
     require(required_ids.issubset(ids), "behavioral eval suite is missing a core case")
 

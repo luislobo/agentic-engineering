@@ -60,6 +60,11 @@ Use $reliable-ai-coding to define the task contract, work within bounded permiss
 and return objective verification evidence.
 ```
 
+Use one primary skill per task. `reliable-ai-coding` is the default for ordinary code changes;
+`agentic-engineering` replaces it for consequential architecture or high-risk work.
+`implementation-quality` is the optional companion lens. PR readiness and feedback closure remain
+separate read-only and mutating workflows. See [skill selection and prompt recipes](docs/SKILL_RECIPES.md).
+
 ### Claude Code
 
 ```bash

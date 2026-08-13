@@ -29,6 +29,9 @@ Selected. `skills/` is the keeper. Codex, Claude, and Copilot receive host-speci
   notices and distinguish cited methodology from copied expression.
 - **Naming:** use outcome-oriented, low-collision identifiers: `agentic-engineering`, `implementation-quality`, `reliable-ai-coding`, `pr-readiness`, and `pr-feedback-closure`.
 - **Daily AI-coding workflow:** keep prompt design, context selection, tool boundaries, verification, and efficiency in `reliable-ai-coding`; defer high-assurance architecture to `agentic-engineering` and implementation craft to `implementation-quality`.
+- **Skill orchestration:** choose one primary workflow; use `implementation-quality` as the
+  optional companion lens, escalate rather than stack overlapping workflows, and keep read-only
+  PR readiness separate from mutating feedback closure.
 - **Release version:** treat the identifier and repository rename as the breaking `2.0.0` release and require manifest version lockstep.
 
 ## Residual risks

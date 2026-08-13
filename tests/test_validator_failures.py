@@ -35,9 +35,11 @@ class ValidatorFailureTests(unittest.TestCase):
             main = skills / "agentic-engineering/SKILL.md"
             implementation = skills / "implementation-quality/SKILL.md"
             reliable = skills / "reliable-ai-coding/SKILL.md"
+            routing = skills / "reliable-ai-coding/references/skill-routing.md"
             main.parent.mkdir(parents=True)
             implementation.parent.mkdir(parents=True)
             reliable.parent.mkdir(parents=True)
+            routing.parent.mkdir(parents=True)
             main.write_text("## Non-negotiable gates\n", encoding="utf-8")
             implementation.write_text(
                 "## Precedence\nValue Objects are MANDATORY\n",
@@ -45,6 +47,12 @@ class ValidatorFailureTests(unittest.TestCase):
             )
             reliable.write_text(
                 "## Required gates\nInspect before edit\nEvidence before acceptance\n",
+                encoding="utf-8",
+            )
+            routing.write_text(
+                "one primary\n"
+                "Escalate from `reliable-ai-coding` to `agentic-engineering`\n"
+                "sequentially, not simultaneously\n",
                 encoding="utf-8",
             )
             with mock.patch.object(validator, "SKILLS", skills):

@@ -8,7 +8,8 @@ authorization or adding unearned ceremony. Both are required.
 
 evals/cases.json covers narrow fixes, an ordinary PR, a high-risk migration, audit-only intent,
 approval-gated feedback closure, incomplete readiness evidence, separate merge authorization,
-and an everyday AI-coding task that must inspect before editing and finish with evidence.
+an everyday AI-coding task that must inspect before editing and finish with evidence, and a
+skill-routing case that selects one primary plus a distinct companion without stacking workflows.
 Each case defines deterministic hard gates and a small human-scored rubric.
 
 Validate the suite with:
