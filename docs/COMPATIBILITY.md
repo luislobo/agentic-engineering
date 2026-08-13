@@ -62,6 +62,7 @@ The hosts agree on the Agent Skills directory format but use different package s
 - Claude Code: [Create plugins](https://code.claude.com/docs/en/plugins), [Plugins reference](https://code.claude.com/docs/en/plugins-reference), and [Plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
 - Claude GitHub review: [Code Review](https://code.claude.com/docs/en/code-review) and [GitHub Actions](https://code.claude.com/docs/en/github-actions)
 - GitHub Copilot CLI: [Creating a plugin](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating) and [Plugin concepts](https://docs.github.com/en/copilot/concepts/agents/about-plugins)
+- GitHub Actions security: [Workflow permissions](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#permissions) and [secure use of `pull_request_target`](https://docs.github.com/en/actions/reference/security/securely-using-pull_request_target)
 - Google Antigravity 2: [Antigravity skills codelab](https://codelabs.developers.google.com/getting-started-agy-ide#10), [Antigravity CLI and SDK code review](https://codelabs.developers.google.com/agy-cli-sdk-code-review), and [Firebase Agent Skills installation](https://firebase.google.com/docs/ai-assistance/agent-skills)
 
 Documentation was reviewed on 2026-08-13. Platform schemas can change; update the compatibility tests and this contract together.

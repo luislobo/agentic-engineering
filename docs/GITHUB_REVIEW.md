@@ -70,11 +70,25 @@ Use one of these documented patterns:
 
 `/review` is only an example custom trigger. Document the chosen trigger in the repository and do
 not claim that it is built into Antigravity. Keep the SDK agent deny-by-default and do not expose a
-writable GitHub credential to its process. GitHub Actions `permissions` are scoped to a workflow or
-job, not an individual step. For strongest isolation, run the read-only review in one job, pass its
-report as an artifact, and post it from a separate job with `pull-requests: write`. A simpler
-single-job workflow must rely on the agent's tool policy and avoid passing the job token to the
-agent process before a separate posting action consumes the report.
+writable GitHub credential to its process.
+
+## GitHub Actions security
+
+These controls apply to Claude, Antigravity, and other agent-backed review Actions. GitHub Actions
+`permissions` are scoped to a workflow or job, not an individual step. For strongest isolation,
+run the read-only review in one job, pass its report as an artifact, and post it from a separate job
+with `pull-requests: write`. A simpler single-job workflow must rely on the agent's tool policy and
+avoid passing the job token to the agent process before a separate posting action consumes the
+report.
+
+Treat pull-request code, metadata, artifacts, and model output as untrusted data. Prefer the
+`pull_request` event for untrusted changes. Never combine `pull_request_target` or another
+privileged trigger with checking out and executing the pull request's code. A privileged posting
+job may read and post a report, but it must not execute artifact contents. Do not expose that
+job's GitHub token or unrelated secrets to the review job; give the review process only the minimum
+provider credential it requires. Fork pull requests may not receive provider secrets under
+`pull_request`; skip them or require a trusted approval instead of switching to a privileged
+trigger that executes the fork's code.
 
 ## Other agents
 
@@ -120,3 +134,4 @@ Official integration details:
 - [Claude Code Review](https://code.claude.com/docs/en/code-review)
 - [Claude Code GitHub Actions](https://code.claude.com/docs/en/github-actions)
 - [Antigravity CLI and SDK code review](https://codelabs.developers.google.com/agy-cli-sdk-code-review)
+- [Securely using `pull_request_target`](https://docs.github.com/en/actions/reference/security/securely-using-pull_request_target)

@@ -25,6 +25,8 @@
   remains the evidence fallback.
 - Document Claude managed review and GitHub Action triggers, plus Antigravity's SDK-backed
   automatic or repository-defined review Action without inventing a universal mention.
+- Harden provider-mapping evals and privileged GitHub Actions guidance against incomplete mode
+  descriptions and execution of untrusted pull-request code.
 
 ## 2.0.0 — 2026-07-23
 

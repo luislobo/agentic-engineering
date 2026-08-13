@@ -148,13 +148,13 @@ Before declaring the review cycle complete, verify:
 6. Replies remain in the original threads and reference checkable evidence.
 7. Thread and comment IDs were used for their correct purposes.
 8. Current unresolved-thread count was re-queried after mutations.
-9. Fresh review was requested when required and supported.
+9. Fresh review was requested when required, supported, and authorized.
 10. The readiness verdict reflects current checks, approvals, conflicts, draft state, threads, and repository policy.
 11. No merge occurred without separate authorization.
 
 ## Relationship to the other perspectives
 
-- The system-engineering workflow determines whether feedback exposes a missing requirement, invariant, or architectural decision.
+- The `agentic-engineering` workflow determines whether feedback exposes a missing requirement, invariant, or architectural decision.
 - The implementation-quality perspective helps evaluate implementation-level concerns and the quality of accepted repairs.
 - The human-craft lens prevents mechanical reviewer appeasement, unsupported closure claims, unnecessary comments, and bloated fixes.
 - This lifecycle ensures the resulting decisions and evidence are carried through the social and operational mechanics of a pull request.

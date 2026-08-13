@@ -358,6 +358,7 @@ def validate_credits_and_docs() -> None:
         "Antigravity has no universal GitHub mention",
         "repository-defined on-demand comment",
         "not an individual step",
+        "Never combine `pull_request_target`",
         "gh",
         "GraphQL",
         "Unknown",
@@ -372,6 +373,8 @@ def validate_credits_and_docs() -> None:
             "PR feedback closure must document configured Codex review")
     require("fresh Copilot review" not in lifecycle and "Copilot pass" not in lifecycle,
             "PR feedback closure must not require a Copilot-specific review")
+    require("system-engineering workflow" not in lifecycle,
+            "PR feedback closure must use the canonical agentic-engineering name")
 
 
 def validate_all() -> None:
