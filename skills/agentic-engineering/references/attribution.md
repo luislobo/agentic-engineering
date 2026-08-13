@@ -64,7 +64,7 @@ Luis Lobo independently authored the PR review lifecycle. It contributes:
 - coherent review-driven changes and relevant validation;
 - replies in the original review threads;
 - thread resolution followed by a zero-unresolved verification;
-- an optional fresh Copilot review.
+- an optional fresh connected-agent review.
 
 This repository packages the lifecycle as portable, outcome-oriented Agent Skills for Codex,
 Claude Code, GitHub Copilot CLI, and Google Antigravity 2. Canonical workflows prefer the host's

@@ -115,7 +115,11 @@ Do not resolve an OWNER DECISION item, a failing fix, or a concern awaiting revi
 
 Fetch current thread state after replies and resolutions. Confirm zero unresolved threads or list each remaining blocker. Re-run affected checks when the final change can invalidate earlier evidence.
 
-When supported and authorized, request a fresh reviewer or Copilot pass after the reviewed changes are available. Treat the new review as new evidence, not as a ceremonial step.
+When supported and authorized, request a fresh connected-agent review after the reviewed changes
+are available. For configured Codex Code Review, use `@codex review`; for another agent, use its
+documented GitHub review trigger. Copilot is optional. Treat the new review as new evidence, not
+as a ceremonial step. If no agent review integration is configured, rely on required human review,
+repository policy, and CI without pretending that an agent review occurred.
 
 ### 7. Report merge readiness
 
@@ -144,13 +148,13 @@ Before declaring the review cycle complete, verify:
 6. Replies remain in the original threads and reference checkable evidence.
 7. Thread and comment IDs were used for their correct purposes.
 8. Current unresolved-thread count was re-queried after mutations.
-9. Fresh review was requested when required and supported.
+9. Fresh review was requested when required, supported, and authorized.
 10. The readiness verdict reflects current checks, approvals, conflicts, draft state, threads, and repository policy.
 11. No merge occurred without separate authorization.
 
 ## Relationship to the other perspectives
 
-- The system-engineering workflow determines whether feedback exposes a missing requirement, invariant, or architectural decision.
+- The `agentic-engineering` workflow determines whether feedback exposes a missing requirement, invariant, or architectural decision.
 - The implementation-quality perspective helps evaluate implementation-level concerns and the quality of accepted repairs.
 - The human-craft lens prevents mechanical reviewer appeasement, unsupported closure claims, unnecessary comments, and bloated fixes.
 - This lifecycle ensures the resulting decisions and evidence are carried through the social and operational mechanics of a pull request.
@@ -159,7 +163,7 @@ Before declaring the review cycle complete, verify:
 
 This lifecycle was independently authored by Luis Lobo.
 
-The source contributes the two-mode status/review distinction, unresolved-thread triage, ACCEPT/REJECT classification, approval before edits, coherent review-driven changes, original-thread replies, separate thread and comment identifiers, verified zero-unresolved state, merge-readiness reporting, and fresh Copilot review. This adaptation adds owner-decision escalation, connector-first tool routing, authorization boundaries, an Unknown verdict for incomplete evidence, and conflict resolution with the anti-slop rules.
+The source contributes the two-mode status/review distinction, unresolved-thread triage, ACCEPT/REJECT classification, approval before edits, coherent review-driven changes, original-thread replies, separate thread and comment identifiers, verified zero-unresolved state, merge-readiness reporting, and optional fresh agent review. This adaptation adds owner-decision escalation, connector-first tool routing, authorization boundaries, an Unknown verdict for incomplete evidence, and conflict resolution with the anti-slop rules.
 
 Luis Lobo distributes this lifecycle under the repository MIT License. See
 [attribution.md](attribution.md).

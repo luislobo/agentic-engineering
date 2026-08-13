@@ -73,6 +73,7 @@ def validate_required_files() -> None:
         ROOT / "docs/DECISIONS.md",
         ROOT / "docs/EVALUATION.md",
         ROOT / "docs/SKILL_RECIPES.md",
+        ROOT / "docs/GITHUB_REVIEW.md",
         ROOT / "AGENTS.md",
         ROOT / "CLAUDE.md",
         ROOT / ".github/copilot-instructions.md",
@@ -169,6 +170,13 @@ def validate_manifests() -> None:
         require(manifest.get("author", {}).get("name") == "Luis Lobo",
                 "plugin manifest author drift")
 
+    descriptions = {manifest.get("description") for manifest in manifests}
+    keywords = {tuple(manifest.get("keywords", [])) for manifest in manifests}
+    require(len(descriptions) == 1, "plugin manifest description drift")
+    require(len(keywords) == 1, "plugin manifest keyword drift")
+    require("ai-coding" in codex.get("keywords", []),
+            "plugin manifests must expose the reliable AI-coding capability")
+
     require(codex.get("skills") == "./skills/", "Codex skills path must be ./skills/")
     require(codex.get("interface", {}).get("developerName") == "Luis Lobo",
             "Codex developer metadata missing")
@@ -246,6 +254,19 @@ def validate_instruction_contracts() -> None:
             "reliable-ai-coding must preserve inspect-before-edit and evidence gates")
     require(len(reliable) <= 10_000,
             "reliable-ai-coding SKILL.md exceeds the progressive-disclosure budget")
+    descriptions = {
+        name: parse_frontmatter(SKILLS / f"{name}/SKILL.md")["description"]
+        for name in (NAME, "implementation-quality", "reliable-ai-coding")
+    }
+    require("Use reliable-ai-coding instead for ordinary" in descriptions[NAME],
+            "agentic-engineering must route ordinary bounded work to reliable-ai-coding")
+    require("reliable-ai-coding or agentic-engineering" in descriptions["implementation-quality"],
+            "implementation-quality must identify both primary workflows that invoke it")
+    require("Defer greenfield systems" in descriptions["reliable-ai-coding"],
+            "reliable-ai-coding must defer consequential work to agentic-engineering")
+    require("Applies to features, bugs, refactors, architecture" not in
+            descriptions["reliable-ai-coding"],
+            "reliable-ai-coding must not overlap agentic-engineering architecture triggers")
     for contract in (
         "one primary",
         "Escalate from `reliable-ai-coding` to `agentic-engineering`",
@@ -278,8 +299,8 @@ def validate_evals() -> None:
     document = load_json(ROOT / "evals/cases.json")
     require(document.get("schema_version") == 1, "eval cases schema version must be 1")
     cases = document.get("cases")
-    require(isinstance(cases, list) and len(cases) >= 9,
-            "behavioral eval suite must contain the nine core cases")
+    require(isinstance(cases, list) and len(cases) >= 10,
+            "behavioral eval suite must contain the ten core cases")
     ids = [case.get("id") for case in cases]
     require(len(ids) == len(set(ids)), "behavioral eval case IDs must be unique")
     required_ids = {
@@ -292,6 +313,7 @@ def validate_evals() -> None:
         "merge-separate-authorization",
         "bounded-ai-coding-task",
         "skill-routing-meaningful-feature",
+        "github-review-without-copilot",
     }
     require(required_ids.issubset(ids), "behavioral eval suite is missing a core case")
 
@@ -323,6 +345,36 @@ def validate_credits_and_docs() -> None:
     compatibility = (ROOT / "docs/COMPATIBILITY.md").read_text(encoding="utf-8")
     for platform in ("Codex", "Claude Code", "GitHub Copilot CLI", "Google Antigravity 2"):
         require(platform in compatibility, f"compatibility contract missing {platform}")
+
+    github_review = (ROOT / "docs/GITHUB_REVIEW.md").read_text(encoding="utf-8")
+    for contract in (
+        "Copilot is optional",
+        "@codex review",
+        "@claude review",
+        "@claude review always",
+        "Claude Code GitHub Action",
+        "In interactive mode",
+        "In automation mode",
+        "Antigravity has no universal GitHub mention",
+        "repository-defined on-demand comment",
+        "not an individual step",
+        "Never combine `pull_request_target`",
+        "gh",
+        "GraphQL",
+        "Unknown",
+    ):
+        require(contract in github_review,
+                f"GitHub review contract missing: {contract}")
+
+    lifecycle = (SKILLS / "pr-feedback-closure/references/lifecycle.md").read_text(
+        encoding="utf-8",
+    )
+    require("@codex review" in lifecycle,
+            "PR feedback closure must document configured Codex review")
+    require("fresh Copilot review" not in lifecycle and "Copilot pass" not in lifecycle,
+            "PR feedback closure must not require a Copilot-specific review")
+    require("system-engineering workflow" not in lifecycle,
+            "PR feedback closure must use the canonical agentic-engineering name")
 
 
 def validate_all() -> None:

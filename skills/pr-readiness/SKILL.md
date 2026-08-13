@@ -36,6 +36,8 @@ If the user asks to address review feedback, stop the readiness workflow and use
      hidden-by-default comments, using it as context without counting it as unresolved;
    - repository-specific policy blockers.
 4. Prefer the host agent's connected GitHub integration. Use local GitHub CLI or GraphQL only when read-only connector coverage is insufficient, especially for unresolved-thread state or Actions logs.
+   Existing connected-agent reviews, including Codex reviews, are evidence to inspect when present.
+   Do not request `@codex review` or another fresh review in this read-only workflow.
 5. Always read suppressed review material when the host exposes it. Do not infer missing state. If
    access or synchronization prevents complete comment coverage or another reliable conclusion,
    identify the unavailable evidence.

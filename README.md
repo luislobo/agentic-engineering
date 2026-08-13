@@ -1,6 +1,6 @@
 # Agentic Engineering
 
-A portable plugin and skill pack for building nontrivial software with coding agents while keeping consequential decisions, evidence, and final acceptance under human ownership.
+A portable plugin and skill pack for reliable daily AI coding and nontrivial software delivery while keeping permissions, consequential decisions, evidence, and final acceptance under human ownership.
 
 Created and maintained by [Luis Lobo](https://github.com/luislobo).
 
@@ -34,7 +34,7 @@ They are not collapsed into one doctrine. Outcomes, safety, repository rules, la
 
 Each workflow is a self-contained Agent Skill. The plugin is the distribution layer: it installs the related skills as one versioned package and adds only the metadata each host requires.
 
-No custom MCP server is bundled. GitHub work uses the host’s connected GitHub integration first, then a local `gh`/GraphQL fallback only when a required capability is missing. That keeps authentication and authorization in the host instead of hiding them in this package.
+No custom MCP server is bundled. GitHub work uses the host’s connected GitHub integration first, then a local `gh`/GraphQL fallback only when a required capability is missing. That keeps authentication and authorization in the host instead of hiding them in this package. A GitHub Copilot subscription is not required for the core skills or PR lifecycle.
 
 ## Install
 
@@ -80,11 +80,38 @@ Claude plugin skills are namespaced, for example:
 
 ### GitHub Copilot CLI
 
+Copilot CLI is an optional supported host, not a dependency. Install this package there only when
+the project has Copilot access:
+
 ```bash
 copilot plugin install luislobo/agentic-engineering
 ```
 
 Confirm installation with `copilot plugin list` and inspect loaded skills with `/skills list`.
+
+### GitHub.com review integrations
+
+Use the review agent that is actually configured for the repository:
+
+- **Codex:** connect the repository to Codex Cloud, enable Code Review, then comment
+  `@codex review` on the pull request. Codex reads applicable `AGENTS.md` review rules and posts a
+  standard GitHub review.
+- **Claude managed Code Review:** after an owner enables it, comment `@claude review` for one
+  review or `@claude review always` to review subsequent pushes. A Claude GitHub Action in
+  interactive mode responds to `@claude <request>`; automation mode can run its review plugin on
+  configured PR events without waiting for a mention.
+- **Google Antigravity:** there is no universal GitHub mention. Use an Antigravity SDK GitHub
+  Action that runs automatically or define and document a repository-specific trigger such as
+  `/review`.
+- **Another coding agent:** use that agent's documented GitHub review trigger or app workflow.
+  Do not assume that its mention syntax matches Codex.
+- **No connected review agent:** inspect the pull request with an authenticated local checkout and
+  `gh`/GraphQL where needed. Treat repository-required human approvals, branch protection, and CI
+  as the authority. Missing required evidence produces **Unknown**.
+
+Agent review is additional evidence; it does not replace tests, CI, branch protection, or required
+human approvals. Readiness remains read-only, feedback changes require explicit authorization, and
+merge requires a separate request. See [GitHub review without a Copilot dependency](docs/GITHUB_REVIEW.md).
 
 ### Google Antigravity 2
 
@@ -188,4 +215,4 @@ methodological inspirations are documented in [THIRD_PARTY_NOTICES.md](THIRD_PAR
 - Luis Lobo’s independently authored PR review lifecycle
 - DeepLearning.AI and Anthropic’s *Building Toward Computer Use with Anthropic*, taught by Colt Steele and introduced by Andrew Ng
 
-See [NOTICE.md](NOTICE.md) and the [detailed attribution](skills/agentic-engineering/references/attribution.md) for pinned revisions, adaptation boundaries, and licensing notes.
+See [NOTICE.md](NOTICE.md), the [agentic-engineering attribution](skills/agentic-engineering/references/attribution.md), and the [reliable-ai-coding attribution](skills/reliable-ai-coding/references/attribution.md) for pinned revisions, adaptation boundaries, and licensing notes.

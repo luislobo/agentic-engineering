@@ -37,6 +37,10 @@ Read [the canonical lifecycle](references/lifecycle.md) before changing a pull r
 4. Use a local GitHub CLI or GraphQL only for gaps such as thread-level resolution state, resolution mutations, current-branch PR discovery, or Actions logs.
 5. Do not claim that Actions logs were inspected through a connector that does not provide them.
 6. If a required connector or CLI is unavailable, stop and explain the missing capability instead of fabricating state.
+7. Treat GitHub Copilot as optional. When a fresh agent review is authorized, use the configured
+   host integration: for Codex Code Review, comment `@codex review`; for another agent, use its
+   documented GitHub review trigger. If no agent review integration is configured, continue with
+   repository-required human review and CI evidence rather than inventing an agent review.
 
 ## Address-feedback mode
 
@@ -79,7 +83,7 @@ Resolve the thread only after the approved action or explanation is present. Use
 
 ### 5. Verify closure
 
-Re-query unresolved threads and affected checks. Confirm zero unresolved threads or list every remaining blocker. Request a fresh review only when supported and authorized.
+Re-query unresolved threads and affected checks. Confirm zero unresolved threads or list every remaining blocker. Request a fresh connected-agent review only when supported and authorized; for configured Codex Code Review, use `@codex review`.
 
 ### 6. Report readiness
 
