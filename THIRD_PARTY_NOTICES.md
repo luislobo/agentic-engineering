@@ -31,6 +31,13 @@ as methodological inspiration. This repository paraphrases ideas and provides
 independent software-specific expression; it does not grant rights to or
 redistribute the article text.
 
+## Building Toward Computer Use with Anthropic
+
+The DeepLearning.AI and Anthropic short course, taught by Colt Steele and introduced by Andrew Ng,
+is cited as methodological and technical inspiration for `skills/reliable-ai-coding/`. The skill
+paraphrases course concepts and provides independent software-engineering expression; it does not
+redistribute the course transcript, notebooks, or media.
+
 ## PR feedback lifecycle
 
 Luis Lobo independently created the PR review lifecycle and distributes it

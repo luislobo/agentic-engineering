@@ -15,15 +15,18 @@ clear reuse terms and can preserve compatible third-party notices.
 | --- | --- |
 | `agentic-engineering` | Risk-scaled system design and delivery: outcomes, invariants, alternatives, differential analysis, keeper implementation, adversarial validation, rollout, and handoff |
 | `implementation-quality` | A complementary implementation lens covering TDD, SOLID, clean code, object responsibilities, code smells, patterns, testing, and local architecture |
+| `reliable-ai-coding` | A daily AI-coding operating loop for precise task contracts, targeted context, bounded tools, objective verification, and efficient context reuse |
 | `pr-readiness` | A strictly read-only pull-request readiness report |
 | `pr-feedback-closure` | Approval-gated feedback triage, minimum-effective repairs, evidence-backed replies, verified resolution, and readiness reporting |
 
-The workflow combines four distinct perspectives:
+The workflow combines five distinct perspectives:
 
 1. Josh Bleecher Snyder’s vertically integrated, differential agent engineering.
 2. Ramziddin’s Solid Skills, integrated through Luis Lobo’s fork.
 3. Peter Yang’s human-craft and 25/50/25 concepts, adapted from writing to software engineering.
 4. Luis Lobo’s independently authored PR review lifecycle.
+5. DeepLearning.AI and Anthropic’s course material on multimodal prompting, structured outputs,
+   prompt caching, tool use, and computer use, adapted into a reliable AI-coding workflow.
 
 They are not collapsed into one doctrine. Outcomes, safety, repository rules, language idioms, and measured evidence decide conflicts.
 
@@ -48,6 +51,13 @@ Start a new session after installation, then invoke a skill such as:
 
 ```text
 Use $agentic-engineering to design and build this distributed system.
+```
+
+For an everyday feature, bug, refactor, or prompt-improvement task:
+
+```text
+Use $reliable-ai-coding to define the task contract, work within bounded permissions,
+and return objective verification evidence.
 ```
 
 ### Claude Code
@@ -171,5 +181,6 @@ methodological inspirations are documented in [THIRD_PARTY_NOTICES.md](THIRD_PAR
 - [ramziddin/solid-skills](https://github.com/ramziddin/solid-skills) and [luislobo/solid-skills](https://github.com/luislobo/solid-skills)
 - [Peter Yang’s 25/50/25 essay](https://creatoreconomy.so/p/use-my-no-ai-slop-skill-to-remove-20-ai-slop-patterns) and [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop)
 - Luis Lobo’s independently authored PR review lifecycle
+- DeepLearning.AI and Anthropic’s *Building Toward Computer Use with Anthropic*, taught by Colt Steele and introduced by Andrew Ng
 
 See [NOTICE.md](NOTICE.md) and the [detailed attribution](skills/agentic-engineering/references/attribution.md) for pinned revisions, adaptation boundaries, and licensing notes.

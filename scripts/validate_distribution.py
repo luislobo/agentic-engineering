@@ -92,7 +92,7 @@ def validate_required_files() -> None:
 def validate_skills() -> List[str]:
     names: List[str] = []
     skill_dirs = sorted(path for path in SKILLS.iterdir() if path.is_dir())
-    require(len(skill_dirs) == 4, f"expected four canonical skills, found {len(skill_dirs)}")
+    require(len(skill_dirs) == 5, f"expected five canonical skills, found {len(skill_dirs)}")
 
     for skill_dir in skill_dirs:
         skill_file = skill_dir / "SKILL.md"
@@ -119,7 +119,13 @@ def validate_skills() -> List[str]:
         require("products:" not in metadata_text,
                 f"{metadata.relative_to(ROOT)}: unsupported policy.products field")
 
-    require(set(names) == {NAME, "implementation-quality", "pr-readiness", "pr-feedback-closure"},
+    require(set(names) == {
+        NAME,
+        "implementation-quality",
+        "pr-readiness",
+        "pr-feedback-closure",
+        "reliable-ai-coding",
+    },
             f"unexpected canonical skills: {', '.join(names)}")
     return names
 
@@ -215,6 +221,7 @@ def validate_safety_contracts() -> None:
 def validate_instruction_contracts() -> None:
     main = (SKILLS / "agentic-engineering/SKILL.md").read_text(encoding="utf-8")
     implementation = (SKILLS / "implementation-quality/SKILL.md").read_text(encoding="utf-8")
+    reliable = (SKILLS / "reliable-ai-coding/SKILL.md").read_text(encoding="utf-8")
     require("## Non-negotiable gates" in main,
             "agentic-engineering must distinguish hard gates from heuristics")
     require(len(main) <= 10_000,
@@ -229,6 +236,12 @@ def validate_instruction_contracts() -> None:
     )
     require(not any(phrase in implementation for phrase in prohibited),
             "implementation-quality reintroduced a context-free absolute")
+    require("## Required gates" in reliable,
+            "reliable-ai-coding must define its evidence and authorization gates")
+    require("Inspect before edit" in reliable and "Evidence before acceptance" in reliable,
+            "reliable-ai-coding must preserve inspect-before-edit and evidence gates")
+    require(len(reliable) <= 10_000,
+            "reliable-ai-coding SKILL.md exceeds the progressive-disclosure budget")
 
 
 def validate_shared_references() -> None:
@@ -254,8 +267,8 @@ def validate_evals() -> None:
     document = load_json(ROOT / "evals/cases.json")
     require(document.get("schema_version") == 1, "eval cases schema version must be 1")
     cases = document.get("cases")
-    require(isinstance(cases, list) and len(cases) >= 7,
-            "behavioral eval suite must contain the seven core cases")
+    require(isinstance(cases, list) and len(cases) >= 8,
+            "behavioral eval suite must contain the eight core cases")
     ids = [case.get("id") for case in cases]
     require(len(ids) == len(set(ids)), "behavioral eval case IDs must be unique")
     required_ids = {
@@ -266,6 +279,7 @@ def validate_evals() -> None:
         "feedback-approval-gate",
         "unknown-without-evidence",
         "merge-separate-authorization",
+        "bounded-ai-coding-task",
     }
     require(required_ids.issubset(ids), "behavioral eval suite is missing a core case")
 
@@ -285,7 +299,13 @@ def validate_licensing() -> None:
 
 def validate_credits_and_docs() -> None:
     notice = (ROOT / "NOTICE.md").read_text(encoding="utf-8")
-    for credit in ("Luis Lobo", "Josh Bleecher Snyder", "Ramziddin", "Peter Yang"):
+    for credit in (
+        "Luis Lobo",
+        "Josh Bleecher Snyder",
+        "Ramziddin",
+        "Peter Yang",
+        "Building Toward Computer Use with Anthropic",
+    ):
         require(credit in notice, f"NOTICE.md: missing credit for {credit}")
 
     compatibility = (ROOT / "docs/COMPATIBILITY.md").read_text(encoding="utf-8")

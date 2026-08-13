@@ -30,6 +30,7 @@
     "defaultPrompt": [
       "Design this system with explicit invariants and alternatives.",
       "Build this feature and validate the load-bearing behavior.",
+      "Turn this coding task into a bounded workflow with objective evidence.",
       "Check this pull request without merging it."
     ],
     "brandColor": "#2563EB"

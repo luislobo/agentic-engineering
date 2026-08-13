@@ -1,0 +1,7 @@
+interface:
+  display_name: "Reliable AI Coding"
+  short_description: "Bound AI coding with context, tools, and evidence"
+  default_prompt: "Use $reliable-ai-coding to turn this task into a precise, bounded AI-coding workflow and require objective verification before accepting the result."
+policy:
+  allow_implicit_invocation: true
+

@@ -16,7 +16,7 @@ Rejected. Copies would drift in safety rules, credits, and review behavior. A fi
 
 ### Shared skills with thin platform packages
 
-Selected. `skills/` is the keeper. Codex, Claude, and Copilot receive host-specific manifests. Antigravity uses the same open skills directly. All hosts consume the same four canonical skill identifiers; no platform retains a second workflow copy.
+Selected. `skills/` is the keeper. Codex, Claude, and Copilot receive host-specific manifests. Antigravity uses the same open skills directly. All hosts consume the same five canonical skill identifiers; no platform retains a second workflow copy.
 
 ## Consequential resolutions
 
@@ -27,7 +27,8 @@ Selected. `skills/` is the keeper. Codex, Claude, and Copilot receive host-speci
 - **Antigravity packaging:** support the documented Agent Skills install and workspace path; do not invent a custom public plugin schema.
 - **Licensing:** distribute Luis Lobo's original work under MIT; preserve compatible upstream MIT
   notices and distinguish cited methodology from copied expression.
-- **Naming:** use outcome-oriented, low-collision identifiers: `agentic-engineering`, `implementation-quality`, `pr-readiness`, and `pr-feedback-closure`.
+- **Naming:** use outcome-oriented, low-collision identifiers: `agentic-engineering`, `implementation-quality`, `reliable-ai-coding`, `pr-readiness`, and `pr-feedback-closure`.
+- **Daily AI-coding workflow:** keep prompt design, context selection, tool boundaries, verification, and efficiency in `reliable-ai-coding`; defer high-assurance architecture to `agentic-engineering` and implementation craft to `implementation-quality`.
 - **Release version:** treat the identifier and repository rename as the breaking `2.0.0` release and require manifest version lockstep.
 
 ## Residual risks
